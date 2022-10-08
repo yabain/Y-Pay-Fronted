@@ -4,18 +4,18 @@
     <div class="container">
       <img
         class="img-fluid logo-dark mb-2"
-        src="assets/img/logo.png"
-        alt="Logo"
+        src="assets/img/ynkap-logo.png"
+        alt="Logo" style="height: 6vw; width: 18vw !important"
       />
       <div class="loginbox">
         <div class="login-right">
           <div class="login-right-wrap">
-            <h1>Login</h1>
-            <p class="account-subtitle">Access to our dashboard</p>
+            <h1>Se connecter</h1>
+            <p class="account-subtitle">Accédez à votre tableau de bord</p>
 
             <form [formGroup]="form" (ngSubmit)="submit()">
               <div class="form-group">
-                <label class="form-control-label">Email Address</label>
+                <label class="form-control-label">Adresse Email</label>
                 <input
                   class="form-control"
                   type="text"
@@ -38,15 +38,15 @@
                   <div
                     *ngIf="f['email'].errors && f['email'].errors['required']"
                   >
-                    Email is required.
+                    Email est requis.
                   </div>
                   <div *ngIf="f['email'].errors && f['email'].errors['email']">
-                    Please, enter valid email address.
+                    Entrez un email valid.
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-control-label">Password</label>
+                <label class="form-control-label">Mot de passe</label>
                 <div class="pass-group">
                   <input
                     class="form-control"
@@ -72,7 +72,7 @@
                         f['password'].errors && f['password'].errors['required']
                       "
                     >
-                      Password is required.
+                      Le mot de passe est requis
                     </div>
                   </div>
                   <div
@@ -93,13 +93,13 @@
                         id="cb1"
                       />
                       <label class="custom-control-label ms-1" for="cb1"
-                        >Remember me</label
+                        >Garder ma session</label
                       >
                     </div>
                   </div>
                   <div class="col-6 text-end">
                     <a class="forgot-link" [routerLink]="'/forgot-pass'"
-                      >Forgot Password ?</a
+                      >Mot de passe oublié ?</a
                     >
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                 class="btn btn-lg btn-block btn-primary w-100"
                 type="submit"
               >
-                Login
+                Connexion
               </button>
               <div class="login-or">
                 <span class="or-line"></span>
@@ -117,15 +117,15 @@
               </div>
               <!-- Social Login -->
               <div class="social-login mb-3">
-                <span>Login with</span>
+                <span>Connexion avec</span>
                 <a href="javascript:void(0);" class="facebook"
                   ><i class="fab fa-facebook-f"></i></a
                 ><a href="javascript:void(0);" class="google"><i class="fab fa-google"></i></a>
               </div>
               <!-- /Social Login -->
               <div class="text-center dont-have">
-                Don't have an account yet?
-                <a [routerLink]="'/register'">Register</a>
+                Vous n'avez pas encore de compte ?
+                <a [routerLink]="'/register'">Créer un compte.</a>
               </div>
             </form>
           </div>

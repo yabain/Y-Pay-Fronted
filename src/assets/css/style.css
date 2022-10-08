@@ -631,7 +631,7 @@ button.bg-danger:hover {
 	color: #757575 !important;
 }
 .btn-primary {
-	background-color: #7638ff;
+	background-color: #355dae;
 	border: 1px solid #7638ff;
 }
 .btn-primary:hover,
@@ -639,8 +639,9 @@ button.bg-danger:hover {
 .btn-primary.active,
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
-	background-color: #621aff;
-	border: 1px solid #621aff;
+	background-color: #fff;
+	color: #355dae;
+	border: 1px solid #355dae;
 }
 .btn-primary.active.focus,
 .btn-primary.active:focus,
@@ -3641,7 +3642,7 @@ table.table-inbox tbody tr.checked {
 	min-height: 100vh;
 }
 .logo-dark{
-	max-width: 180px;
+	/* max-width: 180px; */
 	margin: auto;
     display: block;
 }

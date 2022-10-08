@@ -4,24 +4,39 @@
     <div class="container">
       <img
         class="img-fluid logo-dark mb-2"
-        src="assets/img/logo.png"
-        alt="Logo"
+        src="assets/img/ynkap-logo.png"
+        alt="Logo" style="height: 6vw; width: 18vw !important"
       />
 
       <div class="loginbox">
         <div class="login-right">
           <div class="login-right-wrap">
-            <h1>Register</h1>
-            <p class="account-subtitle">Access to our dashboard</p>
+            <h1>Création de compte</h1>
+            <!-- <p class="account-subtitle">Access to our dashboard</p> -->
 
             <!-- Form -->
             <form [formGroup]="form" (ngSubmit)="submit()">
               <div class="form-group">
-                <label class="form-control-label">Name</label>
+                <label class="form-control-label">Nom </label>
                 <input class="form-control" type="text" />
               </div>
               <div class="form-group">
-                <label class="form-control-label">Email Address</label>
+                <label class="form-control-label">Prénom</label>
+                <input class="form-control" type="text" />
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Téléphone</label>
+                <input class="form-control" type="text" placeholder="6xxxxxxxx" />
+              </div>
+              <select name="pets" id="pet-select" class="form-group">
+                <option value="">--Sélectionnez un Pays--</option>
+                <option value="cm">Cameroun</option>
+                <option value="ci">Cote d'ivoir</option>
+                <option value="cg">Congo</option>
+                <option value="gn">Ginné équatorial</option>
+            </select>
+              <div class="form-group">
+                <label class="form-control-label">Adresse Email</label>
                 <input
                   class="form-control"
                   type="text"
@@ -38,7 +53,7 @@
                   <div
                     *ngIf="f['email'].errors && f['email'].errors['required']"
                   >
-                    Email is required.
+                    l'email est requis.
                   </div>
                 </div>
                 <div *ngIf="CustomControler != 0" class="invalid-feedback">
@@ -46,7 +61,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-control-label">Password</label>
+                <label class="form-control-label">Mot de passe</label>
                 <input
                   class="form-control"
                   type="password"
@@ -65,12 +80,12 @@
                       f['password'].errors && f['password'].errors['required']
                     "
                   >
-                    Password is required.
+                    Mot de passe requis.
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-control-label">Confirm Password</label>
+                <label class="form-control-label">Confirmation de mot de passe</label>
                 <input
                   class="form-control"
                   type="password"
@@ -92,11 +107,11 @@
                       f['confirmPassword'].errors['required']
                     "
                   >
-                    Confirm Password is required.
+                    Confirmer le mot de passe
                   </div>
                 </div>
                 <div *ngIf="isvalidconfirmpassword" class="invalid-feedback">
-                  Password not matching
+                  Le mot de passe ne correspond pas.
                 </div>
               </div>
 
@@ -106,7 +121,7 @@
                   class="btn btn-lg btn-block btn-primary w-100"
                   type="submit"
                 >
-                  Register
+                  Créer un compte
                 </button>
               </div>
             </form>
@@ -114,17 +129,17 @@
 
             <div class="login-or">
               <span class="or-line"></span>
-              <span class="span-or">or</span>
+              <span class="span-or">ou</span>
             </div>
             <!-- Social Login -->
             <div class="social-login">
-              <span>Register with</span>
+              <span>Créer avec</span>
               <a href="javascript:void(0);" class="facebook"><i class="fab fa-facebook-f"></i></a
               ><a href="javascript:void(0);" class="google"><i class="fab fa-google"></i></a>
             </div>
             <!-- /Social Login -->
             <div class="text-center dont-have">
-              Already have an account? <a [routerLink]="'/login-form'">Login</a>
+              Vous avez déjà un compte? <a [routerLink]="'/login-form'">Connexion</a>
             </div>
           </div>
         </div>
