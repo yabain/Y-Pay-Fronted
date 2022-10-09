@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  Inject,
-  AfterViewInit,
-} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import {
   Event,
   NavigationStart,
@@ -12,80 +6,71 @@ import {
   ActivatedRoute,
   Params,
 } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
-import { CommonServiceService } from 'src/app/shared/services/common-service.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { DataService } from 'src/app/shared/services/data.service';
 import * as Feather from 'feather-icons';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  //changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-all-modules',
+  templateUrl: './all-modules.component.html',
+  styleUrls: ['./all-modules.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit  {
-  adminShow: boolean = false;
+export class AllModulesComponent implements OnInit {
+  adminShow: boolean = true;
+
   constructor(
     @Inject(DOCUMENT) private document:any,
-    public commonService: CommonServiceService,
+    public commonService: DataService,
     private route: ActivatedRoute,
     public Router: Router
   ) {
-    // Router.events.subscribe((event: Event) => {
-    //   if (event instanceof NavigationStart) {
-    //     if (
-    //       event.url === '/dashboard-two' ||
-    //       event.url === '/dashboard-three' ||
-    //       event.url === '/dashboard-four' ||
-    //       event.url === '/dashboard-five' ||
-    //       event.url === '/forgot-pass' ||
-    //       event.url === '/lock-screen' ||
-    //       event.url === '/login-form' ||
-    //       event.url === '/register' ||
-    //       event.url === '/error-first' ||
-    //       event.url === '/error-second' ||
-    //       event.url === '/' ||
-    //      !localStorage.getItem('LoginData')
-    //     ) {
-    //       this.adminShow = false;
-    //     } else {
-    //       this.adminShow = true;
-    //     }
-    //     if (
-    //       event.url === '/forgot-pass' ||
-    //       event.url === '/lock-screen' ||
-    //       event.url === '/login-form' ||
-    //       event.url === '/register' ||
-    //       event.url === '/error-first' ||
-    //       event.url === '/error-second'
-    //     )
-    //     {
-    //       document.querySelector('body').classList.add('plain-page');
-    //     } else {
-    //       document.querySelector('body').classList.remove('plain-page');
-    //     }
-    //     // if (
-    //     //   event.url === '/dashboard-five'
-    //     // )
-    //     // {
-    //     //   document.querySelector('.main-wrapper').classList.add('container');
-    //     // } else {
-    //     //   document.querySelector('.main-wrapper').classList.remove('container');
-    //     // }
-    //     // if (
-    //     //   event.url === '/error-first' ||
-    //     //   event.url === '/error-second'
-    //     // ) {
-    //     //   document.querySelector('body').classList.add('error-page');
-    //     //   document.querySelector('body').classList.remove('mat-typography');
-    //     // } else {
-    //     //   document.querySelector('body').classList.remove('error-page');
-    //     //   document.querySelector('body').classList.add('mat-typography');
-    //     // }
-    //   }
+    Router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        if (
+          event.url === '/dashboard-two' ||
+          event.url === '/dashboard-three' ||
+          event.url === '/dashboard-four' ||
+          event.url === '/dashboard-five' ||
+          event.url === '/forgot-pass' ||
+          event.url === '/lock-screen' ||
+          event.url === '/login-form' ||
+          event.url === '/register' ||
+          event.url === '/error-first' ||
+          event.url === '/error-second'
+        ) {
+          this.adminShow = false;
+		  console.log(event.url)
+        } else {
+          this.adminShow = true;
+        }
+        if (
+          event.url === '/forgot-pass' ||
+          event.url === '/lock-screen' ||
+          event.url === '/login-form' ||
+          event.url === '/register' ||
+          event.url === '/error-first' ||
+          event.url === '/error-second'
+        )
+        {
+          document.querySelector('body').classList.add('plain-page');
+        } else {
+          document.querySelector('body').classList.remove('plain-page');
+        }
+        // if (
+        //   event.url === '/error-first' ||
+        //   event.url === '/error-second'
+        // ) {
+        //   document.querySelector('body').classList.add('error-page');
+        //   document.querySelector('body').classList.remove('mat-typography');
+        // } else {
+        //   document.querySelector('body').classList.remove('error-page');
+        //   document.querySelector('body').classList.add('mat-typography');
+        // }
+      }
 
-    // });
+    });
   }
+
   ngOnInit(): void {
     // Sidebar Visible
 
@@ -270,5 +255,3 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
 }
-
-
