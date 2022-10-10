@@ -1,0 +1,32 @@
+{
+    "language": "Language",
+    "currency": "Currency",
+    "connexion": "Connexion",
+    "enterYour": "Enter your ",
+    "pwdShouldBe": "Votre mot de passe doit contenir ",
+    "upTo8Char": "Au moins 8 charactères",
+    "upTo1Captal": "Au moins 1 majuscule",
+    "upTo1Number": "Au moins 1 chiffre",
+    "upTo1SpecialCahr": "Au moins 1 charactère spécial",
+    "stayCoonect": "Garder ma session",
+    "forgotPwd": "Mot de passe oublié",
+    "or": "ou",
+    "connectWith": "Connexion avec",
+    "createAccount": " Créer mon compte",
+    "dontHaveAccount": "Vous n'avez pas encore de compte ",
+    "emailRequired": "Votre email est requis.",
+    "enterValidEmail": "Entrez un email valid.",
+    "passwordRequired": "Le mot de passe est requis.",
+
+
+    
+    "user":{
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "contact": "Contact",
+        "password": "Password",
+        "emailAdress": "Email adresse"
+    }
+    
+  }

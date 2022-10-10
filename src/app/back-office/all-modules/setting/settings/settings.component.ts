@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/shared/services/user/user.service';
 declare var $: any;
 
 @Component({
@@ -7,9 +8,11 @@ declare var $: any;
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-  constructor() {}
+  userData: any;
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.userData = this.userService.getLocalStorageUser();
     // Pricing Options Show
 
     $('#pricing_select input[name="rating_option"]').on('click', function (this:any) {

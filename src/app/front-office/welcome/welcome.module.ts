@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegiserComponent } from './regiser.component';
-import { RegisterRoutingModule } from './register-routing.module';
+import { WelcomeComponent } from './welcome.component';
+import { WelcomeRoutingModule } from './welcome-routing.module';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';;
+import { ReactiveFormsModule } from '@angular/forms';
+// import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
 
+
 @NgModule({
-  declarations: [RegiserComponent],
+  declarations: [WelcomeComponent],
   imports: [
     CommonModule,
-    RegisterRoutingModule,
+    WelcomeRoutingModule,
     RouterModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
@@ -22,6 +24,7 @@ import { HttpClient } from '@angular/common/http';
           deps: [HttpClient]
       }
     })
-  ]
+  ],
+  providers: []
 })
-export class RegisterModule { }
+export class WelcomeModule { }

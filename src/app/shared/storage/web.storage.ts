@@ -50,7 +50,7 @@ export class WebStorage {
       if (Eresult.password === uservalue.password) {
         this.Createtoken(uservalue);
         this.Loginvalue.next('Login success');
-        this.router.navigate(['/index']);
+        // this.router.navigate(['/index']);
         this.Loginvalue.next(0);
 
         // Simulation des données venant du serveur

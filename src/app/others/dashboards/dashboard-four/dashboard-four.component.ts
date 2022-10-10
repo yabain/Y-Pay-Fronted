@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Event, Router, NavigationStart } from '@angular/router';
 import * as Feather from 'feather-icons';
 import * as ApexCharts from 'apexcharts';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 declare var $: any;
 
 @Component({
@@ -11,7 +12,9 @@ declare var $: any;
 })
 export class DashboardFourComponent implements OnInit {
   public chartOptions:any
-  constructor(public router: Router,) { }
+  constructor(
+    public router: Router,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     $('#sidebar-menu a').on('click', function (this:any,e:any) {
@@ -152,7 +155,6 @@ export class DashboardFourComponent implements OnInit {
   }
 
   Logout(){
-    localStorage.removeItem('LoginData')
-    this.router.navigate(["/login-form"]);
+    this.authService.logOut();
   }
 }

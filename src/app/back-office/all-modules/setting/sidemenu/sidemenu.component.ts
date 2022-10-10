@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 import { Location } from '@angular/common';
 import { CommonServiceService } from 'src/app/shared/services/common-service.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-sidemenu',
@@ -22,7 +23,8 @@ export class SidemenuComponent implements OnInit {
   constructor(
     private router: Router,
     location: Location,
-    public commonService: CommonServiceService
+    public commonService: CommonServiceService,
+    private authService: AuthService
   ) {
     router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
@@ -44,9 +46,8 @@ export class SidemenuComponent implements OnInit {
   ngOnInit(): void {}
 
   logout() {
-    localStorage.clear();
+    this.authService.logOut();
     this.commonService.nextmessage('logout');
-    this.router.navigate(['/']);
   }
 
   navigate(name:any) {

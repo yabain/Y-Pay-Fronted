@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Event, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 declare var $: any;
 
 @Component({
@@ -18,10 +20,13 @@ export class SidemenuComponent implements OnInit {
   splitVal:any
   base = '';
   page = '';
+  userData: any;
 
   constructor(
     public router: Router,
-    private commonService: DataService
+    private commonService: DataService,
+    private authService: AuthService,
+    private userService: UserService
   ) {
     router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -51,6 +56,8 @@ export class SidemenuComponent implements OnInit {
           return false;
       }
   });
+
+  this.userData = this.userService.getLocalStorageUser();
   }
 
   ngAfterViewInit() {
@@ -92,7 +99,6 @@ export class SidemenuComponent implements OnInit {
   }
 
   Logout(){
-    localStorage.removeItem('LoginData')
-    this.router.navigate(["/login-form"]);
+    this.authService.logOut();
   }
 }

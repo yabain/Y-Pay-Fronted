@@ -4,6 +4,10 @@ import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,8 +16,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     LoginRoutingModule,
     RouterModule,
-    ReactiveFormsModule
-
-  ]
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
+  ],
+  providers: []
 })
 export class LoginModule { }

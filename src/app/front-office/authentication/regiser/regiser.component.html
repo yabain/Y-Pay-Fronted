@@ -1,28 +1,41 @@
 <!-- Main Wrapper -->
-<div class="main-wrapper login-body">
+<div class="main-wrapper login-body bg-img">
   <div class="login-wrapper">
     <div class="container">
-      <img
-        class="img-fluid logo-dark mb-2"
-        src="assets/img/ynkap-logo.png"
-        alt="Logo" style="height: 6vw; width: 18vw !important"
-      />
-
       <div class="loginbox">
         <div class="login-right">
           <div class="login-right-wrap">
-            <h1>S'enregistrer</h1>
+            <img class="img-fluid logo-dark mb-2" src="assets/img/ynkap-logo.png" alt="Logo"
+              style="height: 5vw; width: 13vw !important;" />
+              <br>
+            <h1>{{ 'register' | translate }}</h1>
             <p class="account-subtitle">Solicitez un compte marchant</p>
 
             <!-- Form -->
             <form [formGroup]="form" (ngSubmit)="submit()">
               <div class="form-group">
-                <label class="form-control-label">Nom </label>
-                <input class="form-control" type="text" placeholder="Entrer votre nom"/>
+                <label class="form-control-label">{{ 'user.firstName' | translate }}</label>
+                <input class="form-control" type="text" formControlName="field_firstName" placeholder="{{ 'enterYour' | translate }}{{ 'user.firstName' | translate }}"
+                  id="field_firstName" [ngClass]="{
+                    'is-invalid': f['field_firstName'].touched && f['field_firstName'].invalid
+                  }" />
+                <div *ngIf="f['field_firstName'].touched && f['field_firstName'].invalid" class="invalid-feedback">
+                  <div *ngIf="f['field_firstName'].errors && f['field_firstName'].errors['required']">
+                    {{ 'firstNameRequired' | translate }}
+                  </div>
+                </div>
               </div>
               <div class="form-group">
-                <label class="form-control-label">Prénom</label>
-                <input class="form-control" type="text" placeholder="Entrer votre prénom"/>
+                <label class="form-control-label">{{ 'user.lastName' | translate }}</label>
+                <input class="form-control" type="text" formControlName="field_lastName" placeholder="{{ 'enterYour' | translate }}{{ 'user.lastName' | translate }}"
+                  id="field_lastName" [ngClass]="{
+                    'is-invalid': f['field_lastName'].touched && f['field_lastName'].invalid
+                  }" />
+                <div *ngIf="f['field_lastName'].touched && f['field_lastName'].invalid" class="invalid-feedback">
+                  <div *ngIf="f['field_lastName'].errors && f['field_lastName'].errors['required']">
+                    {{ 'lastNameRequired' | translate }}
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label class="form-control-label">Téléphone</label>
@@ -36,105 +49,63 @@
                 <option value="gn">Ginné équatorial</option>
             </select> -->
               <div class="form-group">
-                <label class="form-control-label">Adresse Email</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  formControlName="email"
-                  placeholder="Entrer votre email"
-                  id="email"
-                  [ngClass]="{
-                    'is-invalid': f['email'].touched && f['email'].invalid
-                  }"
-                />
-                <div
-                  *ngIf="f['email'].touched && f['email'].invalid"
-                  class="invalid-feedback"
-                >
-                  <div
-                    *ngIf="f['email'].errors && f['email'].errors['required']"
-                  >
-                    l'email est requis.
-                  </div>
+                <label class="form-control-label">{{ 'user.emailAdress' | translate }}</label>
+                <input class="form-control" type="text" formControlName="field_email" placeholder="{{ 'enterYour' | translate }}{{ 'user.email' | translate }}"
+                  id="field_email" [ngClass]="{
+                    'is-invalid': f['field_email'].touched && f['field_email'].invalid
+                  }" />
+                <div class="invalid-feedback" *ngIf="CustomControler?.status === 'field_email'">
+                  {{ CustomControler.message }}
                 </div>
-                <div *ngIf="CustomControler != 0" class="invalid-feedback">
-                  {{ CustomControler }}
+                <div *ngIf="f['field_email'].touched && f['field_email'].invalid" class="invalid-feedback">
+                  <div *ngIf="f['field_email'].errors && f['field_email'].errors['required']">
+                    {{ 'emailRequired' | translate }}
+                  </div>
+                  <div *ngIf="f['field_email'].errors && f['field_email'].errors['field_email']">
+                    {{ 'enterValidEmail' | translate }}
+                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-control-label">Mot de passe</label>
-                <input
-                  class="form-control"
-                  type="password"
-                  formControlName="password"
-                  placeholder="Entrer votre mot de passe"
-                  id="password"
-                  [ngClass]="{
-                    'is-invalid': f['password'].touched && f['password'].invalid
-                  }"
-                />
-                <div
-                  *ngIf="f['password'].touched && f['password'].invalid"
-                  class="invalid-feedback"
-                >
-                  <div
-                    *ngIf="
-                      f['password'].errors && f['password'].errors['required']
-                    "
-                  >
-                    Mot de passe requis.
+                <label class="form-control-label">{{ 'user.password' | translate }}</label>
+                <div class="pass-group">
+                  <input class="form-control" [type]="Toggledata ? 'password' : 'text'" type="password"
+                    formControlName="field_password" placeholder="{{ 'enterYour' | translate }}{{ 'user.password' | translate }}" id="password" [ngClass]="{
+                      'is-invalid':
+                        f['field_password'].touched && f['field_password'].invalid
+                    }" />
+                  <span
+                    [ngClass]="Toggledata == true ? 'fas toggle-field_password fa-eye-slash' : 'fas toggle-field_password fa-eye'"
+                    (click)="iconLogle()"></span>
+                  <div *ngIf="f['field_password'].touched && f['field_password'].invalid" class="invalid-feedback">
+                    <div *ngIf="
+                        f['field_password'].errors && f['field_password'].errors['required']
+                      ">
+                    {{ 'passwordRequired' | translate }}
+                    </div>
+                  </div>
+                  <div class="invalid-feedback" *ngIf="CustomControler?.status === 'password'">
+                    {{ CustomControler.message }}
                   </div>
                 </div>
-              </div>
-              <div style="background-color: rgba(248, 180, 71, 0.575);
-              border-radius: 5px;
-              padding: 5px;
-              margin-top: 3px;
-              margin-bottom: 5px;"><b style="color: #000"> Votre mot de passe doit contenir: </b><br>
-                <ol>
-                  <li>Au moins 8 charactères</li>
-                  <li>Au moins 1 majuscule</li>
-                  <li>Au moins 1 chiffre</li>
-                  <li>Au moins 1 charactères spécial</li>
-                </ol>
-              </div>
-              <div class="form-group">
-                <label class="form-control-label">Confirmation de mot de passe</label>
-                <input
-                  class="form-control"
-                  type="password"
-                  formControlName="confirmPassword"
-                  placeholder="Repéter le moot de passe"
-                  id="confirmPassword"
-                  [ngClass]="{
-                    'is-invalid': f['confirmPassword'].touched && f['confirmPassword'].invalid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    f['confirmPassword'].touched && f['confirmPassword'].invalid
-                  "
-                  class="invalid-feedback"
-                >
-                  <div
-                    *ngIf="
-                      f['confirmPassword'].errors &&
-                      f['confirmPassword'].errors['required']
-                    "
-                  >
-                    Confirmer le mot de passe
-                  </div>
-                </div>
-                <div *ngIf="isvalidconfirmpassword" class="invalid-feedback">
-                  Le mot de passe ne correspond pas.
+                <div style="background-color: rgba(248, 180, 71, 0.575);
+                border-radius: 5px;
+                padding: 5px;
+                margin-top: 5px"><b style="color: #000"> {{ 'pwdShouldBe' | translate }}: </b><br>
+                  <ol>
+                    <li>{{ 'upTo8Char' | translate }}</li>
+                    <li>{{ 'upTo1Captal' | translate }}</li>
+                    <li>{{ 'upTo1Number' | translate }}</li>
+                    <li>{{ 'upTo1SpecialCahr' | translate }}</li>
+                  </ol>
                 </div>
               </div>
               <div class="form-group">
                 <div class="row">
                   <div class="col-12">
                     <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="cb2" />
-                      <label class="custom-control-label ms-1" for="cb1">J'accepte les <a href="">termes</a> et <a href="">politique</a> d'untilisation.</label>
+                      <input type="checkbox" formControlName="field_agree" class="custom-control-input" id="cb2" />
+                      <label class="custom-control-label ms-1" for="cb1">{{ 'agreeAll' | translate }} <a href="">{{ 'terms' | translate }}</a> {{ 'and' | translate }} <a href="">{{ 'policy' | translate }}</a> {{ 'dataUsage' | translate }}</label>
                     </div>
                   </div>
                 </div>
@@ -146,7 +117,7 @@
                   class="btn btn-lg btn-block btn-primary w-100"
                   type="submit"
                 >
-                  Créer un compte
+                {{ 'register' | translate }}
                 </button>
               </div>
             </form>
@@ -154,17 +125,17 @@
 
             <div class="login-or">
               <span class="or-line"></span>
-              <span class="span-or">ou</span>
+              <span class="span-or">{{ 'or' | translate }}</span>
             </div>
             <!-- Social Login -->
             <div class="social-login">
-              <span>Créer avec</span>
+              <span>{{ 'connectWith' | translate }}</span>
               <a href="javascript:void(0);" class="facebook"><i class="fab fa-facebook-f"></i></a
               ><a href="javascript:void(0);" class="google"><i class="fab fa-google"></i></a>
             </div>
             <!-- /Social Login -->
             <div class="text-center dont-have">
-              Vous avez déjà un compte? <a [routerLink]="'/login-form'">Connexion</a>
+              {{ 'haveAccount' | translate }}? <a [routerLink]="'/login-form'">Connexion</a>
             </div>
           </div>
         </div>

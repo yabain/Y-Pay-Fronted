@@ -6,46 +6,46 @@
         <div class="login-right">
           <div class="login-right-wrap">
             <img class="img-fluid logo-dark mb-2" src="assets/img/ynkap-logo.png" alt="Logo"
-              style="height: 6vw; width: 18vw !important;" />
+              style="height: 5vw; width: 13vw !important;" />
               <br>
-            <h1>Se connecter</h1>
+            <h1>{{ 'connexion' | translate }}</h1>
             <!-- <p class="account-subtitle">Accédez à votre tableau de bord</p> -->
 
             <form [formGroup]="form" (ngSubmit)="submit()">
               <div class="form-group">
-                <label class="form-control-label">Adresse Email</label>
-                <input class="form-control" type="text" formControlName="email" placeholder="Entrer votre adresse email"
-                  id="email" [ngClass]="{
-                    'is-invalid': f['email'].touched && f['email'].invalid
+                <label class="form-control-label">{{ 'user.emailAdress' | translate }}</label>
+                <input class="form-control" type="text" formControlName="field_email" placeholder="{{ 'enterYour' | translate }}{{ 'user.email' | translate }}"
+                  id="field_email" [ngClass]="{
+                    'is-invalid': f['field_email'].touched && f['field_email'].invalid
                   }" />
                 <div class="invalid-feedback" *ngIf="CustomControler?.status === 'email'">
                   {{ CustomControler.message }}
                 </div>
-                <div *ngIf="f['email'].touched && f['email'].invalid" class="invalid-feedback">
-                  <div *ngIf="f['email'].errors && f['email'].errors['required']">
-                    Email est requis.
+                <div *ngIf="f['field_email'].touched && f['field_email'].invalid" class="invalid-feedback">
+                  <div *ngIf="f['field_email'].errors && f['field_email'].errors['required']">
+                    {{ 'emailRequired' | translate }}
                   </div>
-                  <div *ngIf="f['email'].errors && f['email'].errors['email']">
-                    Entrez un email valid.
+                  <div *ngIf="f['field_email'].errors && f['field_email'].errors['field_email']">
+                    {{ 'enterValidEmail' | translate }}
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-control-label">Mot de passe</label>
+                <label class="form-control-label">{{ 'user.password' | translate }}</label>
                 <div class="pass-group">
                   <input class="form-control" [type]="Toggledata ? 'password' : 'text'" type="password"
-                    formControlName="password" placeholder="Entrer votre mot de passe" id="password" [ngClass]="{
+                    formControlName="field_password" placeholder="{{ 'enterYour' | translate }}{{ 'user.password' | translate }}" id="password" [ngClass]="{
                       'is-invalid':
-                        f['password'].touched && f['password'].invalid
+                        f['field_password'].touched && f['field_password'].invalid
                     }" />
                   <span
-                    [ngClass]="Toggledata == true ? 'fas toggle-password fa-eye-slash' : 'fas toggle-password fa-eye'"
+                    [ngClass]="Toggledata == true ? 'fas toggle-field_password fa-eye-slash' : 'fas toggle-field_password fa-eye'"
                     (click)="iconLogle()"></span>
-                  <div *ngIf="f['password'].touched && f['password'].invalid" class="invalid-feedback">
+                  <div *ngIf="f['field_password'].touched && f['field_password'].invalid" class="invalid-feedback">
                     <div *ngIf="
-                        f['password'].errors && f['password'].errors['required']
+                        f['field_password'].errors && f['field_password'].errors['required']
                       ">
-                      Le mot de passe est requis
+                    {{ 'passwordRequired' | translate }}
                     </div>
                   </div>
                   <div class="invalid-feedback" *ngIf="CustomControler?.status === 'password'">
@@ -55,12 +55,12 @@
                 <div style="background-color: rgba(248, 180, 71, 0.575);
                 border-radius: 5px;
                 padding: 5px;
-                margin-top: 5px"><b style="color: #000"> Votre mot de passe doit contenir: </b><br>
+                margin-top: 5px"><b style="color: #000"> {{ 'pwdShouldBe' | translate }}: </b><br>
                   <ol>
-                    <li>Au moins 8 charactères</li>
-                    <li>Au moins 1 majuscule</li>
-                    <li>Au moins 1 chiffre</li>
-                    <li>Au moins 1 charactères spécial</li>
+                    <li>{{ 'upTo8Char' | translate }}</li>
+                    <li>{{ 'upTo1Captal' | translate }}</li>
+                    <li>{{ 'upTo1Number' | translate }}</li>
+                    <li>{{ 'upTo1SpecialCahr' | translate }}</li>
                   </ol>
                 </div>
               </div>
@@ -69,20 +69,20 @@
                   <div class="col-6">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" id="cb1" />
-                      <label class="custom-control-label ms-1" for="cb1">Garder ma session</label>
+                      <label class="custom-control-label ms-1" for="cb1">{{ 'stayCoonect' | translate }}</label>
                     </div>
                   </div>
                   <div class="col-6 text-end">
-                    <a class="forgot-link" [routerLink]="'/forgot-pass'">Mot de passe oublié ?</a>
+                    <a class="forgot-link" [routerLink]="'/forgot-pass'">{{ 'forgotPwd' | translate }} ?</a>
                   </div>
                 </div>
               </div>
               <button [disabled]="form.invalid" class="btn btn-lg btn-block btn-primary w-100" type="submit">
-                Connexion
+                {{ 'connexion' | translate }}
               </button>
               <div class="login-or">
                 <span class="or-line"></span>
-                <span class="span-or">ou</span>
+                <span class="span-or">{{ 'or' | translate }}</span>
               </div>
               <!-- Social Login -->
               <div class="social-login mb-3">
@@ -92,8 +92,8 @@
               </div>
               <!-- /Social Login -->
               <div class="text-center dont-have">
-                Vous n'avez pas encore de compte ?
-                <a [routerLink]="'/register'">Créer un compte.</a>
+                {{ 'dontHaveAccount' | translate }} ?
+                <a [routerLink]="'/register'">{{ 'createAccount' | translate }}</a>
               </div>
             </form>
           </div>
