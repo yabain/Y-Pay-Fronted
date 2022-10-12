@@ -12,6 +12,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'welcome',
+    loadChildren: () =>
+      import('./front-office/welcome/welcome.module').then(
+        (m) => m.WelcomeModule
+      ),
+  },
+  {
     path: 'forgot-pass',
     loadChildren: () =>
       import(

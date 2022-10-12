@@ -47,8 +47,12 @@ export class RegiserComponent implements OnInit {
     this.storage.Checkuser();
     this.translate.use(this.translationService.getLanguage());
     this.form = this.formLog.group({
-      'field_firstName': ['', Validators.required ],
-      'field_lastName': ['', Validators.required ],
+      'field_firstName': ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(4)]) ],
+      'field_lastName': ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(4)]) ],
       'field_password': ['', Validators.compose([
         Validators.required,
         Validators.minLength(8),
@@ -57,9 +61,9 @@ export class RegiserComponent implements OnInit {
       'field_email': ['', Validators.compose([
         Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])],
-      'field_profilPicture': ['assets/img/ynkap-user-profil.jpg'],
-      'field_country': [''],
-      'field_location': [''],
+      'field_profilPicture': ['assets/img/ynkap-user-profile.png'],
+      'field_country': ['cameroon'],
+      'field_location': ['Location Name'],
       'field_agree': ['', Validators.required ],
   });
   }

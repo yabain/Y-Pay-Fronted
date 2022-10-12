@@ -9,7 +9,8 @@
 			<!-- <b style="font-family: 'fantasy'; font-size: 2em; color: rgb(41, 101, 190);"><a style="color: rgb(172, 172, 172); margin-left: 10px;">y-</a>nkap</b> -->
 		</a>
 		<a [routerLink]="'/'" class="white-logo">
-			<img src="assets/img/ynkap-icon.png" alt="Logo">
+			<img src="assets/img/ynkap-icon.png" alt="Logo" style="height: 50px;">
+			<img src="assets/img/ynkap-name.png" alt="Logo" style="height: 35px;">
 		</a>
 		<a [routerLink]="'/'" class="logo logo-small">
 			<img src="assets/img/ynkap-icon.png" alt="Logo" width="30" height="30">
@@ -42,23 +43,27 @@
 	<ul class="nav nav-tabs user-menu">
 		<!-- Flag -->
 		<li class="nav-item dropdown has-arrow flag-nav">
-			<a href="javascript:void(0)" class="nav-link dropdown-toggle" aria-controls="collapseExample3"
+			<a *ngIf="fr" href="javascript:void(0)" class="nav-link dropdown-toggle" aria-controls="collapseExample3"
 				data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
-				<img src="assets/img/flags/fr.png" alt="" height="20"> <span>Français</span>
+				<img src="assets/img/flags/fr.png" alt="" height="20"> <span> Français</span>
+			</a>
+			<a *ngIf="en" href="javascript:void(0)" class="nav-link dropdown-toggle" aria-controls="collapseExample3"
+				data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
+				<img src="assets/img/flags/us.png" alt="" height="20"> <span> English</span>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" id="collapseExample3">
-				<a href="javascript:void(0);" class="dropdown-item">
+				<a (click)="setEnLang()"  class="dropdown-item">
 					<img src="assets/img/flags/us.png" alt="" height="16"> English
 				</a>
-				<a href="javascript:void(0);" class="dropdown-item">
+				<a (click)="setFrLang()" class="dropdown-item">
 					<img src="assets/img/flags/fr.png" alt="" height="16"> French
 				</a>
-				<a href="javascript:void(0);" class="dropdown-item">
+				<!-- <a href="javascript:void(0);" class="dropdown-item">
 					<img src="assets/img/flags/es.png" alt="" height="16"> Spanish
 				</a>
 				<a href="javascript:void(0);" class="dropdown-item">
 					<img src="assets/img/flags/de.png" alt="" height="16"> German
-				</a>
+				</a> -->
 			</div>
 		</li>
 		<!-- /Flag -->
@@ -71,8 +76,8 @@
 			</a>
 			<div class="dropdown-menu notifications" id="collapseExample1">
 				<div class="topnav-dropdown-header">
-					<span class="notification-title">Notifications</span>
-					<a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+					<span class="notification-title">{{'notifications' | translate}}</span>
+					<a href="javascript:void(0)" class="clear-noti"> {{'clearAll' | translate}}</a>
 				</div>
 				<div class="noti-content">
 					<ul class="notification-list">
@@ -153,7 +158,7 @@
 					</ul>
 				</div>
 				<div class="topnav-dropdown-footer">
-					<a href="javascript:void(0)">View all Notifications</a>
+					<a href="javascript:void(0)">{{'allNotifs' | translate}}</a>
 				</div>
 			</div>
 		</li>
@@ -170,10 +175,10 @@
 				<span>{{userData.firstName}}</span>
 			</a>
 			<div class="dropdown-menu" id="collapseExample2">
-				<a class="dropdown-item" [routerLink]="'/profile'"><i data-feather="user" class="me-1"></i> Profile</a>
+				<a class="dropdown-item" [routerLink]="'/profile'"><i data-feather="user" class="me-1"></i> {{'profil' | translate}}</a>
 				<a class="dropdown-item" [routerLink]="'/setting/settings'"><i data-feather="settings" class="me-1"></i>
-					Settings</a>
-				<a class="dropdown-item" (click)="Logout()"><i data-feather="log-out" class="me-1"></i> Déconnexion</a>
+					{{'settings' | translate}}</a>
+				<a class="dropdown-item" (click)="Logout()"><i data-feather="log-out" class="me-1"></i> {{'logOut' | translate}}</a>
 			</div>
 		</li>
 		<!-- /User Menu -->
@@ -189,20 +194,22 @@
 	<div class="sidebar-inner slimscroll">
 		<div id="sidebar-menu" class="sidebar-menu">
 			<ul>
-				<li class="menu-title"><span>Main</span></li>
+				<li class="menu-title"><span>Menu</span></li>
 				<li [class.active]="base === 'index'">
-					<a [routerLink]="'/index'"><i data-feather="home"></i> <span>Dashboard</span></a>
+					<a [routerLink]="'/index'"><i data-feather="home"></i> <span>{{'dashboard' | translate}}</span></a>
 				</li>
-				<li [class.active]="base === 'customers'">
-					<a [routerLink]="'/customers/customers-list'"><i data-feather="users"></i>
-						<span>Customers</span></a>
-				</li>
-				<li [class.active]="base === 'estimates'">
-					<a [routerLink]="'/estimates/estimates-list'"><i data-feather="file-text"></i>
-						<span>Estimates</span></a>
+				<li class="submenu" [class.active]="base === 'application'">
+					<a href="javascript:void(0)"><i data-feather="grid"></i> <span> {{'apps' | translate}}</span> <span
+							class="menu-arrow"></span></a>
+					<ul>
+						<li><a [routerLink]="'/application/chat'" [class.active]="page === 'chat'">Chat</a></li>
+						<li><a [routerLink]="'/application/calender'" [class.active]="page === 'calender'">Calendar</a>
+						</li>
+						<li><a [routerLink]="'/application/email'" [class.active]="page === 'email'">Email</a></li>
+					</ul>
 				</li>
 				<li class="submenu" [class.active]="page === 'invoices'">
-					<a href="javascript:void(0)"><i data-feather="clipboard"></i> <span> Invoices</span> <span
+					<a href="javascript:void(0)"><i data-feather="clipboard"></i> <span> {{'invoices' | translate}}</span> <span
 							class="menu-arrow"></span></a>
 					<ul>
 						<li><a [routerLink]="'invoices/invoices-list'"
@@ -219,18 +226,12 @@
 								[class.active]="page === 'invoices-settings'">Invoices Settings</a></li>
 					</ul>
 				</li>
-				<li [class.active]="base === 'items'">
-					<a [routerLink]="'/items/invoice-items'"><i data-feather="star"></i> <span>Items</span></a>
-				</li>
-				<li [class.active]="base === 'payments'">
-					<a [routerLink]="'/payments/payments-list'"><i data-feather="credit-card"></i>
-						<span>Payments</span></a>
-				</li>
-				<li [class.active]="base === 'expenses'">
-					<a [routerLink]="'/expenses/expenses-list'"><i data-feather="package"></i> <span>Expenses</span></a>
+				<li [class.active]="base === 'customers'">
+					<a [routerLink]="'/customers/customers-list'"><i data-feather="users"></i>
+						<span>{{'cuctomers' | translate}}</span></a>
 				</li>
 				<li class="submenu" [class.active]="base === 'reports'">
-					<a href="javascript:void(0)"><i data-feather="pie-chart"></i> <span> Reports</span> <span
+					<a href="javascript:void(0)"><i data-feather="pie-chart"></i> <span> {{'reports' | translate}}</span> <span
 							class="menu-arrow"></span></a>
 					<ul>
 						<li><a [routerLink]="'/reports/sales-report'" [class.active]="page === 'sales-report'">Sales
@@ -244,23 +245,33 @@
 					</ul>
 				</li>
 				<li [class.active]="base === 'setting'">
-					<a [routerLink]="'setting/settings'"><i data-feather="settings"></i> <span>Settings</span></a>
+					<a [routerLink]="'setting/settings'"><i data-feather="settings"></i> <span>{{'settings' | translate}}</span></a>
 				</li>
-				<li class="submenu" [class.active]="base === 'application'">
-					<a href="javascript:void(0)"><i data-feather="grid"></i> <span> Application</span> <span
-							class="menu-arrow"></span></a>
-					<ul>
-						<li><a [routerLink]="'/application/chat'" [class.active]="page === 'chat'">Chat</a></li>
-						<li><a [routerLink]="'/application/calender'" [class.active]="page === 'calender'">Calendar</a>
-						</li>
-						<li><a [routerLink]="'/application/email'" [class.active]="page === 'email'">Email</a></li>
-					</ul>
+				<li [class.active]="base === 'users'">
+					<a [routerLink]="'/users/users-list'"><i data-feather="user"></i> <span>{{'users' | translate}}</span></a>
+				</li>
+				<li [class.active]="base === 'profile'">
+					<a [routerLink]="'/profile'"><i data-feather="user-plus"></i> <span>{{'profile' | translate}}</span></a>
+				</li><br><br>
+				<li [class.active]="base === 'items'">
+					<a [routerLink]="'/application/chat'"><i data-feather="help-circle"></i> <span>{{'support' | translate}}</span></a>
+				</li>
+				<!-- <li [class.active]="base === 'estimates'">
+					<a [routerLink]="'/estimates/estimates-list'"><i data-feather="file-text"></i>
+						<span>Estimates</span></a>
+				</li>
+				<li [class.active]="base === 'items'">
+					<a [routerLink]="'/items/invoice-items'"><i data-feather="star"></i> <span>Items</span></a>
+				</li>
+				<li [class.active]="base === 'payments'">
+					<a [routerLink]="'/payments/payments-list'"><i data-feather="credit-card"></i>
+						<span>Payments</span></a>
+				</li>
+				<li [class.active]="base === 'expenses'">
+					<a [routerLink]="'/expenses/expenses-list'"><i data-feather="package"></i> <span>Expenses</span></a>
 				</li>
 				<li class="menu-title">
 					<span>Pages</span>
-				</li>
-				<li [class.active]="base === 'profile'">
-					<a [routerLink]="'/profile'"><i data-feather="user-plus"></i> <span>Profile</span></a>
 				</li>
 				<li class="submenu"
 					[class.active]="base === 'login-form' || base === 'register' || base === 'forgot-pass' || base === 'lock-screen'">
@@ -283,9 +294,6 @@
 						<li><a [routerLink]="'error-second'" [class.active]="base === 'error-second'">500 Error </a>
 						</li>
 					</ul>
-				</li>
-				<li [class.active]="base === 'users'">
-					<a [routerLink]="'/users/users-list'"><i data-feather="user"></i> <span>Users</span></a>
 				</li>
 				<li [class.active]="base === 'blank-page'">
 					<a [routerLink]="'blank-page'"><i data-feather="file"></i> <span>Blank Page</span></a>
@@ -326,7 +334,7 @@
 						<li><a [routerLink]="'admin-data-table'" [class.active]="base === 'admin-data-table'">Data Table
 							</a></li>
 					</ul>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 	</div>

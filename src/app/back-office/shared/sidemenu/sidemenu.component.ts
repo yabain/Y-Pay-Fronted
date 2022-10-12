@@ -4,6 +4,8 @@ import { Event, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
+import { TranslationService } from 'src/app/shared/services/translation/language.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 declare var $: any;
 
 @Component({
@@ -13,9 +15,13 @@ declare var $: any;
 })
 export class SidemenuComponent implements OnInit {
   showDropdown = true;
+  lang: string;
+  en: boolean = false;
+  fr: boolean = false;
   public bellCollapsed = true;
   public userCollapsed = true;
   public langCollapsed = true;
+  textDir: String = 'ltr';
 
   splitVal:any
   base = '';
@@ -26,8 +32,28 @@ export class SidemenuComponent implements OnInit {
     public router: Router,
     private commonService: DataService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private translate: TranslateService,
+    public translationService: TranslationService
   ) {
+    //this is to determine the text direction depending on the selected language
+    translate.onLangChange.subscribe((event: LangChangeEvent) =>
+    {
+      this.textDir = event.lang == 'fr'? 'rtl' : 'ltr';
+    });
+    
+    this.lang = localStorage.getItem('userLanguage');
+    if (this.lang == 'en'){
+      this.en = true;
+      this.fr = false;
+    } else if (this.lang == 'fr'){
+      this.en = false;
+      this.fr = true;
+    } else {
+      this.lang = 'en';
+      this.en = true;
+      this.fr = false;
+    }
     router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.splitVal = event.url.split('/');
@@ -39,6 +65,8 @@ export class SidemenuComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.translate.use(this.translationService.getLanguage());
+
     $(document).on('click', '#filter_search', function() {
       $('#filter_inputs').slideToggle("slow");
     });
@@ -100,5 +128,13 @@ export class SidemenuComponent implements OnInit {
 
   Logout(){
     this.authService.logOut();
+  }
+
+  setEnLang(){
+    this.translationService.setLanguage('en');
+  }
+
+  setFrLang(){
+    this.translationService.setLanguage('fr');
   }
 }

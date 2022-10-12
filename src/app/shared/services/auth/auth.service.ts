@@ -88,19 +88,20 @@ export class AuthService {
       };
 
       const params = {
-        'firstname': user.field_firstName,
-        'lastname': user.field_lastName,
+        'firstName': user.field_firstName,
+        'lastName': user.field_lastName,
         'password': user.field_password,
         'email': user.field_email,
-        'profilePicture': user.field_profilPicture,
+        'profilePicture': 'https://yabain.com/' + user.field_profilPicture,
         'country': user.field_country,
+        // 'location': user.field_location,
         'location': user.field_location,
       };
 
       this.api.post('user/auth/register', params, headers)
         .subscribe((response: any) => {
           if (response) {
-            if (response.resultCode === 201) {
+            if (response.statusCode === 201) {
               this.registResult = true;
               this.router.navigate(['login']);
               this.toastr.success("Votre compte a été crée. Vous allez recevoir un email de confrirmation.");
@@ -113,18 +114,27 @@ export class AuthService {
         }, (error: any) => {
           if (error && error.statusCode == 400) {
             this.registResult = false;
-            this.toastr.error("Cet email est déjà utilisé");
+            this.toastr.error("Erreur: ", error.message);
             // console.log('Error message: ', error.message);
             reject(error);
           } else if (error && error.statusCode == 500) {
             this.registResult = false;
-            this.toastr.error("Erreur serveur");
+            this.toastr.error("Erreur: ", error.message);
             // console.log('Error message: ', error.message);
             reject(error);
-          }
+          } else if (error && error.status == 400) {
+            this.registResult = false;
+            this.toastr.error("Cette adresse email est déjà utilisé.");
+            // console.log('Error message: ', error.message);
+            reject(error);
+          } else if (error && error.statusCode == 403) {
+            this.registResult = false;
+            this.toastr.success("Un email de confirmation a été envoyé à ", user.field_email);
+            reject(error);
+          } 
           else {
             this.registResult = false;
-            this.toastr.error('Unknow error: ', error.message);
+            this.toastr.error('Erreur inconnue. Contactez un administrateur: ', error.message);
             // console.log('Error message: ', error.message);
             reject(error);
           }
@@ -159,6 +169,10 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.api.post('user/auth/login', param, header)
         .subscribe(response => {
+          const profilePicture = response.data.user.profilePicture;
+          const words = profilePicture.split('yabain.com/');
+          response.data.user.profilePicture = words[1];
+
           if (response.statusCode === 502) {
             this.toastr.success('Identifiants incorrect! Veuillez vérifiez vos informations.');
           }
@@ -171,14 +185,20 @@ export class AuthService {
           this.toastr.success('Bienvenue parmi nous!');
           resolve(response);
         }, error => {
-          if (error && error.statusCode === 502) {
-            this.toastr.error('Identifiants incorrect! Veuillez vérifiez vos informations.');
-          } else if (error && error.statusCode == 500) {
+           if (error && error.statusCode == 500) {
             this.registResult = false;
             this.toastr.error("Erreur serveur");
             reject(error);
+          }  else if (error && error.statusCode == 403) {
+            this.registResult = false;
+            this.toastr.error("Adresse mail non validé. Vérifiez votre email.");
+            reject(error);
+          }  else if (error && error.status == 401) {
+            this.registResult = false;
+            this.toastr.error("Identifiants incorrect! Veuillez vérifiez vos informations.");
+            reject(error);
           } else {
-            this.toastr.error('Erreur inconnue. Contactez un administrateur.');
+            this.toastr.error('Erreur inconnue. Contactez un administrateur.', error.message);
             reject(error);
 
           }

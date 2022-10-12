@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import { CommonServiceService } from 'src/app/shared/services/common-service.service';
 import * as Feather from 'feather-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslationService } from 'src/app/shared/services/translation/language.service'
 
 @Component({
 	selector: 'app-root',
@@ -22,8 +23,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 		public commonService: CommonServiceService,
 		private route: ActivatedRoute,
 		public Router: Router,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private translationService: TranslationService
 	) {
+		this.translationService.initLanguage();
 		// Router.events.subscribe((event: Event) => {
 		//   if (event instanceof NavigationStart) {
 		//     if (
