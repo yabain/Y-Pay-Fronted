@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    // console.log('user datas: ', this.form.value);
+    console.log('user datas: ', this.form.value);
     this.authService.authLogin(this.form.value);
     // this.storage.Login(this.form.value);
   }

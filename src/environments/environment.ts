@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url:  'http://api-dev.y-nkap.com',
+  // url:  'http://api-dev.y-nkap.com',
+  url:  'http://localhost:3000',
   urlProd:  'http://api.y-nkap.com'
 };
 
