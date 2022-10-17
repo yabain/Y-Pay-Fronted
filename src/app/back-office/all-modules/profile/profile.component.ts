@@ -1,5 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { TranslationService } from 'src/app/shared/services/translation/language.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,12 +12,38 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   changePass = false;
   personalDetails = true;
-  name:any
-  id:any
-  key:any
-  constructor(private Router: Router) {}
+  name:any;
+  id:any;
+  key:any;
+  textDir: String = 'ltr';
+  lang: string;
+  userData: any;
+  creationDate: string;
+  creationTime: string;
 
-  ngOnInit(): void {}
+  constructor(
+    private Router: Router,
+    private translate: TranslateService,
+    private translationService: TranslationService,
+    private userService: UserService
+  ){
+    this.userData = this.userService.getLocalStorageUser();
+    const words = this.userData.createdAt.split('T');
+    this.creationDate = words[0];
+    const other = words[1].split('.');
+    this.creationTime = other[0];
+
+    //this is to determine the text direction depending on the selected language
+    translate.onLangChange.subscribe((event: LangChangeEvent) =>
+    {
+      this.textDir = event.lang == 'fr'? 'rtl' : 'ltr';
+    });
+    this.lang = this.translationService.initLanguage();
+  }
+
+  ngOnInit(): void {
+    this.translate.use(this.translationService.getLanguage());
+  }
 
   about() {
     this.changePass = false;

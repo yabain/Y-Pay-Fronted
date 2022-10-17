@@ -9,7 +9,15 @@ declare var $: any;
 })
 export class SettingsComponent implements OnInit {
   userData: any;
-  constructor(private userService: UserService) {}
+  creationDate: string;
+  creationTime: string;
+  constructor(private userService: UserService) {
+    this.userData = this.userService.getLocalStorageUser();
+    const words = this.userData.createdAt.split('T');
+    this.creationDate = words[0];
+    const other = words[1].split('.');
+    this.creationTime = other[0];
+  }
 
   ngOnInit(): void {
     this.userData = this.userService.getLocalStorageUser();

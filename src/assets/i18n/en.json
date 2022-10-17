@@ -35,7 +35,7 @@
     "myApp": "My Apps",
     "appList": "Apps list",
     "invoices": "Invoices",
-    "notification": "Notification",
+    "notifications": "Notifications",
     "preferences": "Preferences",
     "theme": "Theme",
     "timeFormat": "Time Format",
@@ -53,6 +53,7 @@
     "edit": "Edit",
     "about": "About",
     "adress": "Adress",
+    "at": "at",
 
 
 
@@ -72,7 +73,10 @@
         "email": "Email",
         "contact": "Contact",
         "password": "Password",
-        "emailAdress": "Email adresse"
+        "emailAdress": "Email adresse",
+        "zip": "ZIP code",
+        "location": "Location",
+        "country": "Pays"
     }
     
   }

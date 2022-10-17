@@ -48,18 +48,17 @@
     "cuctomers": "Utilisateurs",
     "reports": "Rapports",
     "users": "Utilisateurs",
-    "activities": "Activitées",
+    "activities": "Activités",
     "profileCompletion": "Complétion de profil",
     "edit": "Modifier",
     "about": "A propos",
     "adress": "Adresse",
+    "at": "à",
 
 
 
 
-    "or": "or",
-    "or": "or",
-    "or": "or",
+    "save": "Enregistrer",
     "or": "or",
     "or": "or",
     "or": "or",
@@ -76,7 +75,10 @@
         "email": "Email",
         "password": "Mot de passe",
         "emailAdress": "Adresse email",
-        "contact": "Contact"
+        "contact": "Contact",
+        "zip": "Boîte postale",
+        "location": "Lieux",
+        "country": "Pays"
     }
     
   }

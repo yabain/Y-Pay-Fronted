@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  // url:  'http://api-dev.y-nkap.com',
+  url:  'https://api-dev.y-nkap.com',
+  // url:  'http://localhost:3000',
   // urlProd:  'http://api.y-nkap.com'
-  url:  'http://localhost:3000',
-  urlProd:  'http://localhost:3000'
+  urlProd:  'https://api.y-nkap.com'
 };
 
 /*
