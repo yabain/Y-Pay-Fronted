@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ForgotPwdComponent } from './Forgot-pwd.component';
-import { ForgotPwdRoutingModule } from './Forgot-pwd-routing.module';
+import { ForgotPwdComponent } from './forgot-pwd.component';
+import { ForgotPwdRoutingModule } from './forgot-pwd-routing.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
