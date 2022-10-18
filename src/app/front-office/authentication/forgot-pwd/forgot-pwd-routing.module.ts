@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ForgotPwdComponent } from './Forgot-pwd.component';
+import { ForgotPwdComponent } from './forgot-pwd.component';
 
 const routes: Routes = [
   {
