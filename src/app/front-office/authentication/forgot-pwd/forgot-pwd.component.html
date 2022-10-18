@@ -32,12 +32,26 @@
                   </div>
                 </div>
               </div>
+              <div *ngIf="!waitingResponse">
+              <div *ngIf="sended" style="background-color: rgba(7, 129, 23, 0.275);
+              border-radius: 5px;
+              padding: 5px;
+              margin-top: 5px"><b style="color: rgb(31, 31, 31)"> Un mail de vérification a été envoyé à votre adresse email. </b><br>
+                <p style="color: rgb(26, 26, 26)">Vérifiez également dans vos "SPAM". Si vous ne l'avez pas reçu, cliquez sur Renvoyer.
+                </p>
+              </div>
+              <br>
+              <button *ngIf="sended" [disabled]="form.invalid" class="btn btn-lg btn-block btn-primary w-100" type="submit">
+                {{ 'resend' | translate }}
+              </button>
+            </div>
+              <div *ngIf="!sended">
               <button *ngIf="!waitingResponse" [disabled]="form.invalid" class="btn btn-lg btn-block btn-primary w-100" type="submit">
                 {{ 'send' | translate }}
-              </button>
-              <button *ngIf="waitingResponse" [disabled]="form.invalid" class="btn btn-lg btn-block btn-primary w-100" type="submit">
+              </button></div>
+              <div *ngIf="waitingResponse">
                 <app-progress-indeterminate></app-progress-indeterminate>
-              </button>
+              </div>
               <!-- /Social Login -->
               <div class="text-center dont-have">
                 {{ 'dontHaveAccount' | translate }} ?

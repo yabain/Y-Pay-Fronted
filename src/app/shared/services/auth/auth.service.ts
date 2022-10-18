@@ -69,32 +69,24 @@ export class AuthService {
 
       this.api.post('user/auth/reset-password-link', params, headers)
         .subscribe((response: any) => {
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/login']);
           if (response) {
-            if (response.status == 200) {
-              this.registResult = true;
-              // this.router.navigate(['login']);
-              this.toastr.success('A password reset link has been sent to your email.');
-              resolve(response);
-              return 0;
-            }
-            reject(response);
+            console.log('Success00: ', response);
+            // this.router.navigate(['login']);
+            this.toastr.success('A password reset link has been sent to your email.', 'Success');
+            resolve(response);
             return 0;
           }
         }, (error: any) => {
+          console.error('Erreur00: ', error.message);
           if (error.status == 500) {
-            this.registResult = false;
-            this.toastr.error("Error server");
-            reject(error);
+            this.toastr.error("Error server, 'Error'");
           } else if (error.status == 400) {
-            this.toastr.error("expected field was not submitted or does not have the correct type");
-            reject(error);
+            this.toastr.error("expected field was not submitted or does not have the correct type", 'Error');
           } else if (error.status == 404) {
-            this.toastr.error("Unknown email address.");
-            reject(error);
+            this.toastr.error("Unknown email address.", 'Error');
           } else {
-            this.toastr.error('Unknown error.', error.message);
-            reject(error);
+            this.toastr.error(error.message, 'Error');
 
           }
           reject(error);
@@ -122,7 +114,7 @@ export class AuthService {
         .subscribe((response: any) => {
           if (response) {
             if (response.statusCode == 200) {
-              this.toastr.success('Your password has been updated successfully !');
+              this.toastr.success('Your password has been updated successfully !', 'Success');
               this.router.navigate(['/login']);
               resolve(response);
               return 0;
@@ -132,20 +124,20 @@ export class AuthService {
           }
           reject(response);
           return 0;
-        }, (error: any) => {          
+        }, (error: any) => {
           if (error.status == 401) {
-            this.toastr.error("Your reset request email has expired.");
-            
+            this.toastr.error("Your reset request email has expired.", 'Error');
+
           }
           else if (error.status == 400) {
-            this.toastr.error("Expected field was not submitted or does not have the correct type.");
-            
+            this.toastr.error("Expected field was not submitted or does not have the correct type.", 'Error');
+
           }
           else if (error.status == 500) {
-            this.toastr.error("Internal Server Error.");
-            
+            this.toastr.error("Internal Server Error.", 'Error');
+
           } else {
-            this.toastr.error("Unknown error: ", error);
+            this.toastr.error(error, 'Error');
           }
           reject(error);
         });
@@ -159,7 +151,7 @@ export class AuthService {
   logOut() {
     localStorage.clear();
     this.isLoggedIn = false;
-    this.toastr.success('Votre session a été déconnecté!');
+    this.toastr.success('Votre session a été déconnecté!', 'Success');
     this.router.navigate(["/login-form"]);
   }
 
@@ -191,40 +183,34 @@ export class AuthService {
       this.api.post('user/auth/register', params, headers)
         .subscribe((response: any) => {
           if (response) {
-            if (response.status === 201) {
+            if (response.statusCode === 201) {
               this.registResult = true;
               this.router.navigate(['login']);
-              this.toastr.success("Your account has been created. You will receive a confirmation email.");
-              resolve(response);
-              return;
+              this.toastr.success("Your account has been created. You will receive a confirmation email.", 'Success');
             }
-            reject(response);
+            resolve(response);
             return 0;
           }
         }, (error: any) => {
           if (error.status == 400) {
             this.registResult = false;
-            this.toastr.error("Erreur: ", error.message);
+            this.toastr.error("This email address is already used.", 'Error');
+            // console.log('Error message: ', error.message);
+            reject(error);
+          } else if (error.status == 401) {
+            this.registResult = false;
+            this.toastr.error("This email address is already used.", 'Error');
             // console.log('Error message: ', error.message);
             reject(error);
           } else if (error.status == 500) {
             this.registResult = false;
-            this.toastr.error("Erreur: ", error.message);
+            this.toastr.error('Intternal server error: ' + error.message, 'Error');
             // console.log('Error message: ', error.message);
-            reject(error);
-          } else if (error.status == 400) {
-            this.registResult = false;
-            this.toastr.error("This email address is already used.");
-            // console.log('Error message: ', error.message);
-            reject(error);
-          } else if (error.status == 403) {
-            this.registResult = false;
-            this.toastr.success("A confirmation email was sent to ", user.field_email);
             reject(error);
           }
           else {
             this.registResult = false;
-            this.toastr.error('Unknown error.', error.message);
+            this.toastr.error(error.message, 'Unknown error.');
             // console.log('Error message: ', error.message);
             reject(error);
           }
@@ -268,7 +254,7 @@ export class AuthService {
           response.data.user.profilePicture = words[1];
 
           if (response.status === 502) {
-            this.toastr.success('Incorrect login information! Please verify your information.');
+            this.toastr.success('Incorrect login information! Please verify your information.', 'Success');
           }
 
           this.webStorage.Login(userIdentifiants);
@@ -281,18 +267,18 @@ export class AuthService {
         }, error => {
           if (error.status == 500) {
             this.registResult = false;
-            this.toastr.error("Error server");
+            this.toastr.error("Error server", 'Error');
             reject(error);
-          } else if (error.status == 403) {
+          } else if (error.error.statusCode == 403) {
             this.registResult = false;
-            this.toastr.error("Email address not validated. Check your email.");
+            this.toastr.error("Email address not validated. Check your email.", 'Error');
             reject(error);
-          } else if (error.status == 401) {
+          } else if (error.error.statusCode == 401) {
             this.registResult = false;
-            this.toastr.error("Incorrect email or password! Please verify your information.");
+            this.toastr.error("Incorrect email or password! Please verify your information.", 'Error');
             reject(error);
           } else {
-            this.toastr.error('Unknown error. Contact an administrator.', error.message);
+            this.toastr.error(error.message, 'Error');
             reject(error);
 
           }
@@ -311,35 +297,35 @@ export class AuthService {
     if (token) {
       return new Promise((resolve, reject) => {
         this.api.post('email/confirm', param, header)
-        .subscribe(response => {
-          if (response.status === 200) {
-            this.toastr.success('Your email has been verified.');
-          }
-          this.router.navigateByUrl('/login');
-          resolve(response);
-        }, error => {
-          console.log('erreur: ', error)
+          .subscribe(response => {
+            if (response.status === 200) {
+              this.toastr.success('Your email has been verified.', 'Success');
+            }
+            this.router.navigateByUrl('/login');
+            resolve(response);
+          }, error => {
+            console.log('erreur: ', error)
 
-          if (error.status == 401) {
-            this.toastr.error("Your verification email has expired.");
-            
-          }
-          else if (error.status == 404) {
-            this.toastr.error("User not found.");
-            
-          }
-          else if (error.status == 403) {
-            this.toastr.error("The email has already been confirmed.");
-            
-          }
-          else if (error.status == 500) {
-            this.toastr.error("Internal Server Error.");
-            
-          } else {
-            this.toastr.error("Unknown error: ", error);
-          }
-          reject(error);
-        });
+            if (error.status == 401) {
+              this.toastr.error("Your verification email has expired.", 'Error');
+
+            }
+            else if (error.status == 404) {
+              this.toastr.error("User not found.");
+
+            }
+            else if (error.status == 403) {
+              this.toastr.error("The email has already been confirmed.", 'Error');
+
+            }
+            else if (error.status == 500) {
+              this.toastr.error("Internal Server Error.", 'Error');
+
+            } else {
+              this.toastr.error(error, 'Error');
+            }
+            reject(error);
+          });
       })
     }
   }
@@ -367,7 +353,7 @@ export class AuthService {
         }, (error: any) => {
 
           if (error) {
-            this.toastr.success(error.message);
+            this.toastr.success(error.message, 'Success');
             reject(error);
           }
         });

@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
@@ -8,8 +8,8 @@ import { WebStorage } from 'src/app/shared/storage/web.storage';
 
 @Component({
   selector: 'app-mail-link',
-  templateUrl: './mail-Link.component.html',
-  styleUrls: ['./mail-Link.component.css'],
+  templateUrl: './mail-link.component.html',
+  styleUrls: ['./mail-link.component.css'],
 })
 export class MailLinkComponent implements OnInit {
   token = '';

@@ -7,12 +7,13 @@ import { TranslationService } from 'src/app/shared/services/translation/language
 import { WebStorage } from 'src/app/shared/storage/web.storage';
 
 @Component({
-  selector: 'app-Forgot-pwd',
-  templateUrl: './Forgot-pwd.component.html',
-  styleUrls: ['./Forgot-pwd.component.css'],
+  selector: 'app-forgot-pwd',
+  templateUrl: './forgot-pwd.component.html',
+  styleUrls: ['./forgot-pwd.component.css'],
 })
 export class ForgotPwdComponent implements OnInit {
   submitted = false;
+  sended = false;
   waitingResponse = false;
   error = false;
   errorMsg = '';
@@ -75,6 +76,7 @@ export class ForgotPwdComponent implements OnInit {
     .then((result) => {
       this.submitted = false;
       this.waitingResponse = false;
+      this.sended = true;
     })
     .catch((error) => {
       console.error('Erreur: ', error.message);
