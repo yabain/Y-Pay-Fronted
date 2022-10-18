@@ -12,6 +12,11 @@ import { WebStorage } from 'src/app/shared/storage/web.storage';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  waitingResponse = false;
+  submitted = false;
+  error = false;
+  errorMsg = '';
+
   textDir: String = 'ltr';
   public Toggledata=true;
   public CustomControler:any
@@ -33,6 +38,7 @@ export class LoginComponent implements OnInit {
     private translate: TranslateService,
     public translationService: TranslationService
     ) {
+
       //this is to determine the text direction depending on the selected language
       translate.onLangChange.subscribe((event: LangChangeEvent) =>
       {
@@ -47,6 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.storage.Checkuser();
     this.translate.use(this.translationService.getLanguage());
     // console.log('111 Venant du service: ', this.translationService.getLanguage());    
@@ -63,8 +70,27 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log('user datas: ', this.form.value);
-    this.authService.authLogin(this.form.value);
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+    this.submitted = true;
+    this.waitingResponse = true;
+
+    // console.log('user datas: ', this.form.value);
+    this.authService.authLogin(this.form.value)
+    .then((result) => {
+      this.submitted = false;
+      this.waitingResponse = false;
+    })
+    .catch((error) => {
+      console.error('Erreur: ', error.message);
+      this.waitingResponse = false;
+      this.errorMsg = error.message;
+      this.error = true;
+      this.submitted = false;
+
+    });
     // this.storage.Login(this.form.value);
   }
   ngOnDestroy() {

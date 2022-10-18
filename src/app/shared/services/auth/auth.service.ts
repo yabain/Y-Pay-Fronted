@@ -56,9 +56,50 @@ export class AuthService {
   /*
    * resetPassword is used to reset your password.
    */
-  resetPassword() {
-    this.toastr.success('Email Sent');
-    this.router.navigate(['/login']);
+  resetPassword(user: any) {
+    return new Promise((resolve, reject) => {
+
+      const headers = {
+        'Content-Type': 'application/json',
+        // 'X-CSRF-Token': '97dKe-0-qukVOMY1YNBhsZ-POfPUArpL11YLfRJFD94',
+        // 'Accept': 'application/json'
+      };
+
+      const params = {
+        'email': user.field_email,
+      };
+
+      this.api.post('user/auth/reset-pwd', params, headers)
+        .subscribe((response: any) => {
+          this.router.navigate(['/login']);
+          if (response) {
+            if (response.statusCode === 201) {
+              this.registResult = true;
+              this.router.navigate(['login']);
+              this.toastr.success('Un lien de réinitialisation de mot de passe vous a été envoyé par mail.');
+              resolve(response);
+              return;
+            }
+            reject(response);
+            return 0;
+          }
+        }, (error: any) => {
+          this.toastr.error('Error: ', error);
+          if (error && error.statusCode == 400) {
+            this.toastr.error("Erreur: ", error.message);
+            reject(error);
+          } else if (error && error.status == 400) {
+            this.registResult = false;
+            this.toastr.error("Adresse email introuvable. Verifiez votre email.");
+            reject(error);
+          }
+          else {
+            this.toastr.error('Erreur inconnue. Contactez un administrateur: ', error.message);
+            reject(error);
+          }
+        });
+    });
+
   }
 
   /*
@@ -70,8 +111,6 @@ export class AuthService {
     this.toastr.success('Votre session a été déconnecté!');
     this.router.navigate(["/login-form"]);
   }
-
-
 
   /**
    *  Create an account
@@ -104,7 +143,7 @@ export class AuthService {
             if (response.statusCode === 201) {
               this.registResult = true;
               this.router.navigate(['login']);
-              this.toastr.success("Votre compte a été crée. Vous allez recevoir un email de confrirmation.");
+              this.toastr.success("Your account has been created. You will receive a confirmation email.");
               resolve(response);
               return;
             }
@@ -124,17 +163,17 @@ export class AuthService {
             reject(error);
           } else if (error && error.status == 400) {
             this.registResult = false;
-            this.toastr.error("Cette adresse email est déjà utilisé.");
+            this.toastr.error("This email address is already used.");
             // console.log('Error message: ', error.message);
             reject(error);
           } else if (error && error.statusCode == 403) {
             this.registResult = false;
-            this.toastr.success("Un email de confirmation a été envoyé à ", user.field_email);
+            this.toastr.success("A confirmation email was sent to ", user.field_email);
             reject(error);
-          } 
+          }
           else {
             this.registResult = false;
-            this.toastr.error('Erreur inconnue. Contactez un administrateur: ', error.message);
+            this.toastr.error('Unknown error. Contact an administrator: ', error.message);
             // console.log('Error message: ', error.message);
             reject(error);
           }
@@ -143,6 +182,10 @@ export class AuthService {
 
   }
 
+  /**
+   *  Get authentification status
+   *
+   */
   getAuthStatus(authStatus) {
     if (authStatus == 'true') {
       this.authStatus = true;
@@ -174,31 +217,31 @@ export class AuthService {
           response.data.user.profilePicture = words[1];
 
           if (response.statusCode === 502) {
-            this.toastr.success('Identifiants incorrect! Veuillez vérifiez vos informations.');
+            this.toastr.success('Incorrect login information! Please verify your information.');
           }
-           
+
           this.webStorage.Login(userIdentifiants);
           this.api.setAccessToken(response.data.access_token);
           console.log('User infos: ', response.data.user);
           this.user.setUserInformations(response.data.user)
           this.router.navigate(['index']);
-          this.toastr.success('Bienvenue parmi nous!');
+          this.toastr.success('Welcome !!');
           resolve(response);
         }, error => {
-           if (error && error.statusCode == 500) {
+          if (error && error.statusCode == 500) {
             this.registResult = false;
             this.toastr.error("Erreur serveur");
             reject(error);
-          }  else if (error && error.statusCode == 403) {
+          } else if (error && error.statusCode == 403) {
             this.registResult = false;
-            this.toastr.error("Adresse mail non validé. Vérifiez votre email.");
+            this.toastr.error("Email address not validated. Check your email.");
             reject(error);
-          }  else if (error && error.status == 401) {
+          } else if (error && error.status == 401) {
             this.registResult = false;
-            this.toastr.error("Identifiants incorrect! Veuillez vérifiez vos informations.");
+            this.toastr.error("Incorrect login information! Please verify your information.");
             reject(error);
           } else {
-            this.toastr.error('Erreur inconnue. Contactez un administrateur.', error.message);
+            this.toastr.error('Unknown error. Contact an administrator.', error.message);
             reject(error);
 
           }
@@ -207,11 +250,41 @@ export class AuthService {
     });
   }
 
+  verifyEmail(token?: string) {
+    const param = {
+    };
+    const header = {
+      'Content-Type': 'application/json',
+      'token': token,
+    };
+    if (token) {
+      return new Promise((resolve, reject) => {
+        this.api.post('user/auth/verify-email', param, header)
+        .subscribe(response => {
+          if (response.statusCode === 502) {
+            this.toastr.success('Your email has been verified.');
+          }
 
+          this.router.navigateByUrl('/login');
+
+          resolve(response);
+        }, error => {
+          if (error && error.statusCode == 500) {
+            this.toastr.error("Your verification email has expired.");
+            
+          } else {
+            this.toastr.error("Unknown error: ", error);
+            
+          }
+
+          reject(error);
+        });
+      })
+    }
+  }
   /**
    *  Get the user informations
    */
-
   authUserInformations(): Promise<any> {
 
     return new Promise((resolve, reject) => {

@@ -19,6 +19,7 @@ import { UserService } from './shared/services/user/user.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { TranslationService } from './shared/services/translation/language.service';
+import { ProgressIndeterminateModule } from './shared/elements/progress-indeterminate/progress-indeterminate.module';
 // import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 // AoT requires an exported function for factories
@@ -33,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ProgressIndeterminateModule,
     ToastrModule.forRoot(
       {
         timeOut: 1500,

@@ -4,6 +4,7 @@ import { AuthenticationGuard } from './shared/guard/auth/authentication.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'forgot-pass', redirectTo: 'forgot-pwd', pathMatch: 'full' },
   {
     path: 'login',
     loadChildren: () =>
@@ -19,11 +20,25 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'forgot-pass',
+    path: 'mail',
     loadChildren: () =>
       import(
-        './front-office/authentication/forgot-password/forgot-password.module'
-      ).then((m) => m.ForgotPasswordModule),
+        './front-office/authentication/mail-link/mail-link.module'
+      ).then((m) => m.MailLinkPwdModule),
+  },
+  {
+    path: 'forgot-pwd',
+    loadChildren: () =>
+      import(
+        './front-office/authentication/forgot-pwd/forgot-pwd.module'
+      ).then((m) => m.ForgotPwdModule),
+  },
+  {
+    path: 'new-pwd',
+    loadChildren: () =>
+      import(
+        './front-office/authentication/new-pwd/new-pwd.module'
+      ).then((m) => m.NewPwdModule),
   },
   {
     path: 'register',

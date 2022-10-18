@@ -77,8 +77,11 @@
                   </div>
                 </div>
               </div>
-              <button [disabled]="form.invalid" class="btn btn-lg btn-block btn-primary w-100" type="submit">
+              <button [disabled]="form.invalid" *ngIf="!waitingResponse" class="btn btn-lg btn-block btn-primary w-100" type="submit">
                 {{ 'connexion' | translate }}
+              </button>
+              <button *ngIf="waitingResponse" [disabled]="form.invalid" class="btn btn-lg btn-block btn-primary w-100" type="submit">
+                <app-progress-indeterminate></app-progress-indeterminate>
               </button>
               <div class="login-or">
                 <span class="or-line"></span>
