@@ -1,30 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { WebStorage } from 'src/app/shared/storage/web.storage';
-
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { TranslationService } from 'src/app/shared/services/translation/language.service';
+import { WebStorage } from 'src/app/shared/storage/web.storage';
 
 @Component({
-  selector: 'app-regiser',
-  templateUrl: './regiser.component.html',
-  styleUrls: ['./regiser.component.css']
+  selector: 'app-Forgot-pwd',
+  templateUrl: './Forgot-pwd.component.html',
+  styleUrls: ['./Forgot-pwd.component.css'],
 })
-export class RegiserComponent implements OnInit {
-  waitingResponse = false;
+export class ForgotPwdComponent implements OnInit {
   submitted = false;
+  waitingResponse = false;
   error = false;
   errorMsg = '';
 
-  form: FormGroup;
   textDir: String = 'ltr';
   public Toggledata=true;
-
-  public isvalidconfirmpassword: boolean = false;
+  public CustomControler:any
   public subscription: Subscription;
-  public CustomControler: any;
+  form: FormGroup;
 
   get f() {
     return this.form.controls;
@@ -43,37 +40,29 @@ export class RegiserComponent implements OnInit {
         this.textDir = event.lang == 'fr'? 'rtl' : 'ltr';
       });
 
-    this.subscription = this.storage.Createaccountvalue.subscribe((data) => {
-      this.CustomControler = data;
+    this.subscription = this.storage.Loginvalue.subscribe((data) => {
+      if(data != 0){
+        this.CustomControler = data;
+      }
     });
   }
 
   ngOnInit() {
+    this.waitingResponse = false;
+    this.error = false;
+
     this.storage.Checkuser();
     this.translate.use(this.translationService.getLanguage());
+    // console.log('111 Venant du service: ', this.translationService.getLanguage());    
     this.form = this.formLog.group({
-      'field_firstName': ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(4)]) ],
-      'field_lastName': ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(4)]) ],
-      'field_password': ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)])
-      ],
-      'field_email': ['', Validators.compose([
-        Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])],
-      'field_profilPicture': ['assets/img/ynkap-user-profile.png'],
-      'field_country': ['cameroon'],
-      'field_location': ['Location Name'],
-      'field_agree': ['', Validators.required ],
-  });
+        'field_email': ['', Validators.compose([
+          Validators.required,
+          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])]
+    });
   }
 
   submit() {
+
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
@@ -81,9 +70,8 @@ export class RegiserComponent implements OnInit {
     this.submitted = true;
     this.waitingResponse = true;
 
-    // console.log("User Datas from reg: ", this.form.value)
-
-    this.authService.createAccount(this.form.value)
+    console.log('user datas: ', this.form.value);
+    this.authService.resetPassword(this.form.value)
     .then((result) => {
       this.submitted = false;
       this.waitingResponse = false;
@@ -101,7 +89,6 @@ export class RegiserComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
   iconLogle(){
     this.Toggledata = !this.Toggledata
   }

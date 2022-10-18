@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegiserComponent } from './regiser.component';
-import { RegisterRoutingModule } from './register-routing.module';
+import { ForgotPwdComponent } from './Forgot-pwd.component';
+import { ForgotPwdRoutingModule } from './Forgot-pwd-routing.module';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';;
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
 import { ProgressIndeterminateModule } from 'src/app/shared/elements/progress-indeterminate/progress-indeterminate.module';
 
 @NgModule({
-  declarations: [RegiserComponent],
+  declarations: [ForgotPwdComponent],
   imports: [
     CommonModule,
-    RegisterRoutingModule,
+    ForgotPwdRoutingModule,
     RouterModule,
     ReactiveFormsModule,
     ProgressIndeterminateModule,
@@ -24,6 +24,6 @@ import { ProgressIndeterminateModule } from 'src/app/shared/elements/progress-in
           deps: [HttpClient]
       }
     })
-  ]
+  ],
 })
-export class RegisterModule { }
+export class ForgotPwdModule { }
