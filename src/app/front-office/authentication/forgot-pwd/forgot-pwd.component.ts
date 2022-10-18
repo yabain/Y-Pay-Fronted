@@ -70,8 +70,8 @@ export class ForgotPwdComponent implements OnInit {
     this.submitted = true;
     this.waitingResponse = true;
 
-    console.log('user datas: ', this.form.value);
-    this.authService.resetPassword(this.form.value)
+    // console.log('user mail: ', this.form.value.field_email);
+    this.authService.resetPassword(this.form.value.field_email)
     .then((result) => {
       this.submitted = false;
       this.waitingResponse = false;
