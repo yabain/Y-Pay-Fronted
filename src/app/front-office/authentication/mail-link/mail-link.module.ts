@@ -29,4 +29,4 @@ import { MailLinkComponent } from './mail-link/mail-link.component';
     })
   ],
 })
-export class MailLinkPwdModule { }
+export class MailLinkModule { }

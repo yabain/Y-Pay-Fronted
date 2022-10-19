@@ -278,14 +278,19 @@ export class ApiService {
   // }
 
   // HTTP put
+
   put(endpoint: string, body: any, options?: any): Observable<any> {
-
-    const headers = options;
-
-    return this.http.put(this.url + '/' + endpoint, JSON.stringify(body), {
-      headers
-    });
+    return this.http.put(this.url + '/' + endpoint + '/', body, { 'headers': options });
   }
+
+  // put(endpoint: string, body: any, options?: any): Observable<any> {
+
+  //   const headers = options;
+
+  //   return this.http.put(this.url + '/' + endpoint, JSON.stringify(body), {
+  //     headers
+  //   });
+  // }
 
   // HTTP delete
   delete(endpoint: string, options?: any): Observable<any> {

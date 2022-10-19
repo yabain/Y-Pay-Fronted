@@ -105,7 +105,7 @@
                   <div class="col-12">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" formControlName="field_agree" class="custom-control-input" id="cb2" />
-                      <label class="custom-control-label ms-1" for="cb1">{{ 'agreeAll' | translate }} <a href="">{{ 'terms' | translate }}</a> {{ 'and' | translate }} <a href="">{{ 'policy' | translate }}</a> {{ 'dataUsage' | translate }}</label>
+                      <label class="custom-control-label ms-1" for="cb2">{{ 'agreeAll' | translate }} <a href="">{{ 'terms' | translate }}</a> {{ 'and' | translate }} <a href="">{{ 'policy' | translate }}</a> {{ 'dataUsage' | translate }}</label>
                     </div>
                   </div>
                 </div>
@@ -119,13 +119,9 @@
                 >
                 {{ 'register' | translate }}
                 </button>
-                <button *ngIf="waitingResponse"
-                  [disabled]="form.invalid"
-                  class="btn btn-lg btn-block btn-primary w-100"
-                  type="submit"
-                >
+                <div *ngIf="waitingResponse">
                 <app-progress-indeterminate></app-progress-indeterminate>
-                </button>
+                </div>
               </div>
             </form>
             <!-- /Form -->

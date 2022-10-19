@@ -17,8 +17,8 @@ export class LinkRecieveComponent implements OnInit {
   token = '';
 
   textDir: String = 'ltr';
-  public Toggledata=true;
-  public CustomControler:any
+  public Toggledata = true;
+  public CustomControler: any
   public subscription: Subscription;
   form: FormGroup;
 
@@ -31,27 +31,34 @@ export class LinkRecieveComponent implements OnInit {
     private translate: TranslateService,
     public translationService: TranslationService,
     private toastr: ToastrService,
-    private router: Router
-    ) {
-        const urlData = this.router.url.split('token?');
-        if (urlData[1]){
-            this.token = urlData[1];
-            localStorage.setItem('email_datas', this.token);
-            this.router.navigateByUrl('/mail/mail-confirm');
-        } else {
-            console.log('no token');
-            this.router.navigateByUrl('/login');
-            this.toastr.error('Link error !')
-        }
-        
-      //this is to determine the text direction depending on the selected language
-      translate.onLangChange.subscribe((event: LangChangeEvent) =>
-      {
-        this.textDir = event.lang == 'fr'? 'rtl' : 'ltr';
-      });
+    private router: Router) {
+
+    const urlData = this.router.url.split('token=');
+    if (urlData[1]) {
+      this.token = urlData[1];
+      localStorage.setItem('email_datas', this.token);
+      console.log ('token in locale storage: ', this.token)
+      this.router.navigateByUrl('/mail/mail-confirm');
+    } else {
+      const urlDataPwd = this.router.url.split('resetTokenPwd=');
+      if (urlDataPwd[1]) {
+        this.token = urlDataPwd[1];
+        localStorage.setItem('pwd_email_datas', this.token);
+        this.router.navigateByUrl('/new-pwd');
+      } else {
+        console.log('no token');
+        this.router.navigateByUrl('/login');
+        this.toastr.error('Link error !')
+      }
+    }
+
+    //this is to determine the text direction depending on the selected language
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.textDir = event.lang == 'fr' ? 'rtl' : 'ltr';
+    });
 
     this.subscription = this.storage.Loginvalue.subscribe((data) => {
-      if(data != 0){
+      if (data != 0) {
         this.CustomControler = data;
       }
     });

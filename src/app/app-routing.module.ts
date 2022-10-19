@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () =>
       import(
         './front-office/authentication/mail-link/mail-link.module'
-      ).then((m) => m.MailLinkPwdModule),
+      ).then((m) => m.MailLinkModule),
   },
   {
     path: 'forgot-pwd',
