@@ -4,11 +4,11 @@
     "register": "Sign Up",
     "connexion": "Login",
     "enterYour": "Enter your ",
-    "pwdShouldBe": "Votre mot de passe doit contenir ",
-    "upTo8Char": "At least 8 characters",
-    "upTo1Captal": "At least 1 capital letter",
-    "upTo1Number": "At least 1 capital number",
-    "upTo1SpecialCahr": "At least 1 special feature",
+    "pwdShouldBe": "Ensure that these requirements are met: ",
+    "upTo8Char": "Minimum 8 characters long - the more, the better",
+    "upTo1Captal": "At least one capital letter",
+    "upTo1Number": "At least one capital number",
+    "upTo1SpecialCahr": "At least one special feature",
     "stayCoonect": "Keep my session",
     "forgotPwd": "Forgot your password?",
     "agreeAll": "I agree ",
@@ -56,19 +56,19 @@
     "about": "About",
     "adress": "Adress",
     "at": "at",
+    "save": "Save",
+    "reset": "Reset",
+    "send": "Send",
+    "enterEmailForVerification": "Enter your email to receive an account reset link.",
+    "mailVerification": "Email address verification",
+    "wait": "Please wait.",
+    "error": "Error",
+    "succes": "Success",
+    "resend": "Send again",
+    "newPwd": "New password",
+    "writeNewPwd": "Enter your new password.",
+    "writeAgaine": "Enter again",
 
-
-
-    "or": "or",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-
-    
     "user":{
         "firstName": "First Name",
         "lastName": "Last Name",
@@ -78,7 +78,19 @@
         "emailAdress": "Email adresse",
         "zip": "ZIP code",
         "location": "Location",
-        "country": "Pays"
-    }
+        "country": "Pays",
+        "creationDate": "Creation date"
+    },
+
+    "profileSettigns": "Profile Setting",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or"
+
+    
     
   }

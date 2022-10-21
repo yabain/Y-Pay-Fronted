@@ -24,7 +24,7 @@ export class SidemenuComponent implements OnInit {
     private router: Router,
     location: Location,
     public commonService: CommonServiceService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {

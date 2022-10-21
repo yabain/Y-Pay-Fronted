@@ -271,7 +271,7 @@ export class AuthService {
             reject(error);
           } else if (error.error.statusCode == 403) {
             this.registResult = false;
-            this.toastr.error("Email address not validated. Check your email.", 'Error');
+            this.toastr.error("Email address not verified. Check your email.", 'Error');
             reject(error);
           } else if (error.error.statusCode == 401) {
             this.registResult = false;
@@ -298,9 +298,7 @@ export class AuthService {
       return new Promise((resolve, reject) => {
         this.api.post('email/confirm', param, header)
           .subscribe(response => {
-            if (response.status === 200) {
-              this.toastr.success('Your email has been verified.', 'Success');
-            }
+            this.toastr.success('Your email has been verified.', 'Success');
             this.router.navigateByUrl('/login');
             resolve(response);
           }, error => {

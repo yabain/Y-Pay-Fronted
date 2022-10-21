@@ -43,7 +43,7 @@
     "timeFormat": "Format Horaire",
     "archive": "Archive",
     "history": "Historique",
-    "support": "Support",
+    "support": "Assistance",
     "request": "Request",
     "clearAll": "Vider",
     "allNotifs": "Toutes les Notifications",
@@ -56,10 +56,6 @@
     "about": "A propos",
     "adress": "Adresse",
     "at": "à",
-
-
-
-
     "save": "Enregistrer",
     "reset": "Réinitialiser",
     "send": "Envoyer",
@@ -72,12 +68,6 @@
     "newPwd": "Nouveau mot de passe",
     "writeNewPwd": "Saisisez votre nouveau mot de passe.",
     "writeAgaine": "Saisisez à nouveau",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-    "or": "or",
-
 
     "user":{
         "firstName": "Nom",
@@ -88,7 +78,38 @@
         "contact": "Contact",
         "zip": "Boîte postale",
         "location": "Lieux",
-        "country": "Pays"
-    }
+        "country": "Pays",
+        "creationDate": "Date de création",
+        "darkTheme": "Theme sombre"
+    },
+
+
+
+    "profileSettigns": "Profile Setting",
+    "changePwd": "Changer de passe",
+    "delateAccount": "Supprimer mon compte",
+    "taxType": "Type de taxes",
+    "paymentMethode": "Méthodes de paiement",
+    "taxPercentage": "Commissions",
+    "status": "Statut",
+    "active": "Actif",
+    "inactive": "inactif",
+    "activation": "Activer",
+    "desactivation": "Désactiver",
+    "delate": "Supprimer",
+    "actions": "Actions",
+    "editMethode": "Modifier la méthode",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or",
+    "or": "or"
+
+
     
-  }
+}
