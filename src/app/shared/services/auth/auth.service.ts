@@ -185,7 +185,7 @@ export class AuthService {
           if (response) {
             if (response.statusCode === 201) {
               this.registResult = true;
-              this.router.navigate(['login']);
+              // this.router.navigate(['login']);
               this.toastr.success("Your account has been created. You will receive a confirmation email.", 'Success');
             }
             resolve(response);

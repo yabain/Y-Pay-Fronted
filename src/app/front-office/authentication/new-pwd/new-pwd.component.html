@@ -5,7 +5,7 @@
       <div class="loginbox">
         <div class="login-right">
           <div class="login-right-wrap">
-            <img class="img-fluid logo-dark mb-2" src="assets/img/ynkap-logo.png" alt="Logo"
+            <img class="img-fluid logo-dark mb-2" src="assets/img/y_logo.png" alt="Logo"
               style="height: 5vw; width: 13vw !important;" />
               <br>
             <h1>{{ 'newPwd' | translate }}</h1>
@@ -16,10 +16,13 @@
                   {{ 'writeNewPwd' | translate }}</p>
                   <div class="form-group">
                     <label class="form-control-label">{{ 'newPwd' | translate }}</label>
-                    <input class="form-control" type="password" formControlName="field_password" placeholder="{{ 'enterYour' | translate }}{{ 'user.password'| translate }}"
+                    <input class="form-control" [type]="Toggledata ? 'password' : 'text'" type="password" formControlName="field_password" placeholder="{{ 'enterYour' | translate }}{{ 'user.password'| translate }}"
                       id="field_password" [ngClass]="{
                         'is-invalid': f['field_password'].touched && f['field_password'].invalid
                       }" />
+                      <span
+                        [ngClass]="Toggledata == true ? 'fas toggle-field_password fa-eye-slash' : 'fas toggle-field_password fa-eye'"
+                        (click)="iconLogle()"></span>
                     <div class="invalid-feedback" *ngIf="CustomControler?.status === 'email'">
                       {{ CustomControler.message }}
                     </div>

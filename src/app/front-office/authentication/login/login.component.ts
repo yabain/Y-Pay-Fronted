@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   submitted = false;
   error = false;
   errorMsg = '';
+  lang: string;
+  en: boolean = false;
+  fr: boolean = false;
 
   textDir: String = 'ltr';
   public Toggledata=true;
@@ -38,6 +41,20 @@ export class LoginComponent implements OnInit {
     private translate: TranslateService,
     public translationService: TranslationService
     ) {
+
+      this.lang = this.translationService.initLanguage();
+      
+      if (this.lang == 'en'){
+        this.en = true;
+        this.fr = false;
+      } else if (this.lang == 'fr'){
+        this.en = false;
+        this.fr = true;
+      } else {
+        this.lang = 'en';
+        this.en = true;
+        this.fr = false;
+      }
 
       //this is to determine the text direction depending on the selected language
       translate.onLangChange.subscribe((event: LangChangeEvent) =>
@@ -98,5 +115,12 @@ export class LoginComponent implements OnInit {
   }
   iconLogle(){
     this.Toggledata = !this.Toggledata
+  }
+  setEnLang(){
+    this.translationService.setLanguage('en');
+  }
+
+  setFrLang(){
+    this.translationService.setLanguage('fr');
   }
 }

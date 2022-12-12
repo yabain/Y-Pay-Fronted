@@ -11,7 +11,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [WelcomeComponent],
+  declarations: [
+    WelcomeComponent
+  ],
   imports: [
     CommonModule,
     WelcomeRoutingModule,
@@ -20,8 +22,8 @@ import { HttpClient } from '@angular/common/http';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     })
   ],

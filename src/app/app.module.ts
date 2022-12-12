@@ -58,7 +58,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticationGuard,
     TranslationService
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent,
+  ],
   exports: [TranslateModule]
 })
 export class AppModule {}
