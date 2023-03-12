@@ -2,8 +2,8 @@
     display: none;
 }
 .bg-img{
- background-image: url("../../../../assets/img/ynkap-bg-img.jpg");
+ background-image: url("../../../../assets/img/y_img_bg.jpg");
  background-repeat: no-repeat;
  background-size: cover;
- background-color: #cccccc;
+ background-color: rgb(2, 52, 99) !important;
 }

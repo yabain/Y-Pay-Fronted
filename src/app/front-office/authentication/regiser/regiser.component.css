@@ -2,8 +2,19 @@
     display: none;
 }
 .bg-img{
-    background-image: url("../../../../assets/img/ynkap-bg-img.jpg");
+    background-image: url("../../../../assets/img/y_img_bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #cccccc;
+    background-color: rgb(2, 52, 99);
+   }
+   .login-nav{
+    background-color: #fff;
+    color: rgb(2, 52, 99);
+    border-radius: 10px
+   }
+
+   .login-nav:hover{
+    background-color: grey;
+    color: #fff;
+    border-radius: 10px
    }

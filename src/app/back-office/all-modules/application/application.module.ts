@@ -7,6 +7,9 @@ import { RouterModule } from '@angular/router';
 import { EmailComponent } from './email/email.component';
 import { ChatComponent } from './chat/chat.component';
 import { CalenderComponent } from './calender/calender.component';
+import { MyAppComponent } from './my-app/my-app.component';
+import { AddAppComponent } from './add-app/add-app.component';
+import { MyAppListComponent } from './my-app-list/my-app-list.component';
 
 
 @NgModule({
@@ -14,7 +17,10 @@ import { CalenderComponent } from './calender/calender.component';
     ApplicationComponent,
     EmailComponent,
     ChatComponent,
-    CalenderComponent
+    CalenderComponent,
+    MyAppComponent,
+    AddAppComponent,
+    MyAppListComponent
   ],
   imports: [
     CommonModule,

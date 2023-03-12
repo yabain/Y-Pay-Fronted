@@ -4,11 +4,10 @@ import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
-
+import { ProgressIndeterminateModule } from 'src/app/shared/elements/progress-indeterminate/progress-indeterminate.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -17,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
     LoginRoutingModule,
     RouterModule,
     ReactiveFormsModule,
+    ProgressIndeterminateModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -25,6 +25,5 @@ import { HttpClient } from '@angular/common/http';
       }
     })
   ],
-  providers: []
 })
 export class LoginModule { }

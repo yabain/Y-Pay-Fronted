@@ -3,7 +3,8 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthenticationGuard } from './shared/guard/auth/authentication.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: 'forgot-pass', redirectTo: 'forgot-pwd', pathMatch: 'full' },
   {
     path: 'login',
     loadChildren: () =>
@@ -19,11 +20,25 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'forgot-pass',
+    path: 'mail',
     loadChildren: () =>
       import(
-        './front-office/authentication/forgot-password/forgot-password.module'
-      ).then((m) => m.ForgotPasswordModule),
+        './front-office/authentication/mail-link/mail-link.module'
+      ).then((m) => m.MailLinkModule),
+  },
+  {
+    path: 'forgot-pwd',
+    loadChildren: () =>
+      import(
+        './front-office/authentication/forgot-pwd/forgot-pwd.module'
+      ).then((m) => m.ForgotPwdModule),
+  },
+  {
+    path: 'new-pwd',
+    loadChildren: () =>
+      import(
+        './front-office/authentication/new-pwd/new-pwd.module'
+      ).then((m) => m.NewPwdModule),
   },
   {
     path: 'register',
@@ -62,12 +77,12 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
 
   },
-  {
-    path: '',
-    loadChildren: () =>
-    import('./back-office/all-modules/all-modules.module').then(m => m.AllModulesModule)
-},
-  {path: '**', redirectTo: '/login'},
+//   {
+//     path: '',
+//     loadChildren: () =>
+//     import('./back-office/all-modules/all-modules.module').then(m => m.AllModulesModule)
+// },
+{path: '**', redirectTo: 'welcome'},
 ];
 
 @NgModule({

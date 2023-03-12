@@ -15,7 +15,8 @@ import { HttpLoaderFactory } from 'src/app/app.module';
 
 @NgModule({
   declarations: [
-    AllModulesComponent,SidemenuComponent
+    AllModulesComponent,
+    SidemenuComponent
   ],
   imports: [
     CommonModule,

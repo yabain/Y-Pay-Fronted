@@ -41,8 +41,8 @@ export class SidemenuComponent implements OnInit {
     {
       this.textDir = event.lang == 'fr'? 'rtl' : 'ltr';
     });
+    this.lang = this.translationService.initLanguage();
     
-    this.lang = localStorage.getItem('userLanguage');
     if (this.lang == 'en'){
       this.en = true;
       this.fr = false;

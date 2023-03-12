@@ -5,15 +5,27 @@ import { SettingRoutingModule } from './setting-routing.module';
 import { SettingComponent } from './setting.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    SettingComponent,SidemenuComponent
+    SettingComponent,
+    SidemenuComponent
   ],
   imports: [
     CommonModule,
     SettingRoutingModule,
-    ModalModule.forRoot(),RouterModule
+    ModalModule.forRoot(),
+    RouterModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

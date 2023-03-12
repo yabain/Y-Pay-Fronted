@@ -52,7 +52,7 @@
 				<img src="assets/img/flags/us.png" alt="" height="20"> <span> English</span>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" id="collapseExample3">
-				<a (click)="setEnLang()"  class="dropdown-item">
+				<a (click)="setEnLang()" class="dropdown-item">
 					<img src="assets/img/flags/us.png" alt="" height="16"> English
 				</a>
 				<a (click)="setFrLang()" class="dropdown-item">
@@ -175,7 +175,7 @@
 				<span>{{userData.firstName}}</span>
 			</a>
 			<div class="dropdown-menu" id="collapseExample2">
-				<a class="dropdown-item" [routerLink]="'/profile'"><i data-feather="user" class="me-1"></i> {{'profil' | translate}}</a>
+				<a class="dropdown-item" [routerLink]="'/profile'"><i data-feather="user" class="me-1"></i> {{'profile' | translate}}</a>
 				<a class="dropdown-item" [routerLink]="'/setting/settings'"><i data-feather="settings" class="me-1"></i>
 					{{'settings' | translate}}</a>
 				<a class="dropdown-item" (click)="Logout()"><i data-feather="log-out" class="me-1"></i> {{'logOut' | translate}}</a>
@@ -202,7 +202,7 @@
 					<a href="javascript:void(0)"><i data-feather="grid"></i> <span> {{'apps' | translate}}</span> <span
 							class="menu-arrow"></span></a>
 					<ul>
-						<li><a [routerLink]="'/application/chat'" [class.active]="page === 'chat'">Chat</a></li>
+						<li><a [routerLink]="'/application/my-app'" [class.active]="page === 'my-app'">{{'myApp' | translate}}</a></li>
 						<li><a [routerLink]="'/application/calender'" [class.active]="page === 'calender'">Calendar</a>
 						</li>
 						<li><a [routerLink]="'/application/email'" [class.active]="page === 'email'">Email</a></li>
@@ -244,16 +244,16 @@
 								Report</a></li>
 					</ul>
 				</li>
-				<li [class.active]="base === 'setting'">
-					<a [routerLink]="'setting/settings'"><i data-feather="settings"></i> <span>{{'settings' | translate}}</span></a>
-				</li>
 				<li [class.active]="base === 'users'">
 					<a [routerLink]="'/users/users-list'"><i data-feather="user"></i> <span>{{'users' | translate}}</span></a>
 				</li>
 				<li [class.active]="base === 'profile'">
 					<a [routerLink]="'/profile'"><i data-feather="user-plus"></i> <span>{{'profile' | translate}}</span></a>
-				</li><br><br>
-				<li [class.active]="base === 'items'">
+				</li>
+				<li [class.active]="base === 'setting'">
+					<a [routerLink]="'setting/settings'"><i data-feather="settings"></i> <span>{{'settings' | translate}}</span></a>
+				</li><br><br><br>
+				<li [class.active]="base === 'support'">
 					<a [routerLink]="'/application/chat'"><i data-feather="help-circle"></i> <span>{{'support' | translate}}</span></a>
 				</li>
 				<!-- <li [class.active]="base === 'estimates'">

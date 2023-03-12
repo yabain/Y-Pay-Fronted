@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';;
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
+import { ProgressIndeterminateModule } from 'src/app/shared/elements/progress-indeterminate/progress-indeterminate.module';
 
 @NgModule({
   declarations: [RegiserComponent],
@@ -15,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
     RegisterRoutingModule,
     RouterModule,
     ReactiveFormsModule,
+    ProgressIndeterminateModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

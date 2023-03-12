@@ -6,8 +6,8 @@ import { WebStorage } from 'src/app/shared/storage/web.storage';
 
 @Component({
   selector: 'app-Welcome',
-  templateUrl: './Welcome.component.html',
-  styleUrls: ['./Welcome.component.css'],
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
   textDir: String = 'ltr';

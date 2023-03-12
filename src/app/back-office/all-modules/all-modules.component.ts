@@ -39,7 +39,7 @@ export class AllModulesComponent implements OnInit {
           event.url === '/error-second'
         ) {
           this.adminShow = false;
-		  console.log(event.url)
+		//   console.log(event.url)
         } else {
           this.adminShow = true;
         }
