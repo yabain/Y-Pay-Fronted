@@ -174,7 +174,7 @@ export class AuthService {
         'lastName': user.field_lastName,
         'password': user.field_password,
         'email': user.field_email,
-        'profilePicture': 'https://yabain.com/' + user.field_profilPicture,
+        'profilePicture': 'https://yaba-in.com/' + user.field_profilPicture,
         'country': user.field_country,
         // 'location': user.field_location,
         'location': user.field_location,
@@ -250,7 +250,7 @@ export class AuthService {
       this.api.post('user/auth/login', param, header)
         .subscribe(response => {
           const profilePicture = response.data.user.profilePicture;
-          const words = profilePicture.split('yabain.com/');
+          const words = profilePicture.split('yaba-in.com/');
           response.data.user.profilePicture = words[1];
 
           if (response.status === 502) {

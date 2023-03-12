@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">By:
-  <a href="https://yabain.com" target="_blank"><strong>Yaba-In</strong></a>
+  <a href="https://yaba-in.com" target="_blank"><strong>Yaba-In</strong></a>
   <br>
 </p>
 
