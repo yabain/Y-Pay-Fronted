@@ -1,27 +1,72 @@
-# Kanakku
+<h1 align="center">Y-Nkap</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
+<p align="center">
+  <br>
+  <img src="./src/assets/img/y_logo.png" alt="YaBi logo" width="100%" height="100%"/>
+  <br><br>
+  <i><b> Y-Nkap: </b>a platform (integrator) to manage payments on all merchant web sites.
+    <br>Developed by Yaba-In, a software development company (desktop, web and mobile).</i>
+  <br>
+</p>
 
-## Development server
+<p align="center">By:
+  <a href="https://yabain.com" target="_blank"><strong>Yaba-In</strong></a>
+  <br>
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+<hr>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Documentation
 
-## Build
+Get started with Angular CLI, learn the fundamentals and explore advanced topics on documentation website.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- [Getting started](https://angular.io/start)
+- [CLI](https://angular.io/cli)
+- [Workspace and project file structure](https://angular.io/guide/file-structure)
+- [Workspace configuration](https://angular.io/guide/workspace-config)
+- [Schematics](https://angular.io/guide/schematics)
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Development Setup
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Prerequisites
 
-## Further help
+- Install [Node.js] which includes [Node Package Manager][npm]
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Setting Up a Project
+
+Install the Angular CLI globally:
+
+```
+npm install -g @angular/cli
+```
+
+Open the project directory:
+
+```
+cd [PROJECT DIRECTORY]
+```
+
+Packages installation:
+
+```
+npm i
+```
+
+Start project
+
+```
+ng serve --open
+```
+
+
+
+
+**Yaba-In, your software solution compagny.**
+
+
+
+© 2022 Yaba-In
+
